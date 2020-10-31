@@ -1,0 +1,55 @@
+This programm revises records with information about abonents.
+Record consists of
+ -Surname
+ -Name
+ -Phone number
+ -Addres
+ -Staus(private or official)
+ If status is private:
+ -Birth date
+ Else:
+ -Post
+ -Organization
+1 - generate and read matrix from file
+2 - generate and read vector from file
+3 - write matrix (normal view)
+4 - write vector (normal view)
+5 - write matrix (3 objects)
+6 - write vector (2 objects)
+7 - read matrix from stdin
+8 - read vector from stdin
+9 - normal matrix column mlt
+10 - packed matrix column mlt
+11 - time compare
+0 - exit
+Your choise: matrix 200x200
+zero percent   normal   packed
+          55 0.000107s 0.000122s
+          56 0.000106s 0.000117s
+          57 0.000106s 0.000121s
+          58 0.000107s 0.000108s
+          59 0.000107s 0.000108s
+          60 0.000107s 0.000107s
+          61 0.000107s 0.000103s
+          62 0.000107s 0.000098s
+          63 0.000106s 0.000092s
+          64 0.000106s 0.000081s
+          65 0.000107s 0.000085s
+          66 0.000106s 0.000084s
+          67 0.000106s 0.000077s
+          68 0.000107s 0.000080s
+          69 0.000106s 0.000066s
+          70 0.000107s 0.000065s
+1 - generate and read matrix from file
+2 - generate and read vector from file
+3 - write matrix (normal view)
+4 - write vector (normal view)
+5 - write matrix (3 objects)
+6 - write vector (2 objects)
+7 - read matrix from stdin
+8 - read vector from stdin
+9 - normal matrix column mlt
+10 - packed matrix column mlt
+11 - time compare
+0 - exit
+Your choise: 
