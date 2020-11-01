@@ -24,7 +24,7 @@ ifneq ($(OS),$(WINDOWS))
 endif
 
 release: CFLAGS=-std=c99 -Wall -Werror -Wextra -Wpedantic -Wfloat-equal -Wvla -o3
-release: LFLAGS=-o3
+release: LFLAGS=-o3 -lm
 release: $(OUTPATH)release.lastbuildstate app.exe
 
 debug: $(OUTPATH)debug.lastbuildstate app.exe
@@ -40,7 +40,7 @@ $(OUTPATH)debug.lastbuildstate:
 	touch $(OUTPATH)debug.lastbuildstate
 
 app.exe: $(OBJFILES)
-	$(CC) $(LFLAGS) -o $@ $^
+	$(CC) $^ $(LFLAGS) -o $@
 
 $(OUTPATH)main.o: $(SRCPATH)main.c
 	if [ ! -d $(OUTPATH) ]; then mkdir $(OUTPATH); fi

@@ -204,11 +204,11 @@ int read_gen_pvector(pvector_t *pvector)
 
 int time_table(void)
 {
-    for (size_t size = 50; size < 900; size *= 2)
+    for (size_t size = 50; size < 801; size *= 2)
     {
         printf("matrix %zux%zu\n", size, size);
         printf("zero percent   normal   packed\n");
-        for (size_t percent = 30; percent <= 50; percent += 5)
+        for (size_t percent = 30; percent <= 60; percent += 5)
         {
             FILE *f = fopen(MATRIX_FILE, "w");
             if (f)
@@ -320,9 +320,7 @@ int time_table(void)
 int main(void)
 {
     setbuf(stdout, NULL);
-    puts("This programm revises records with information about abonents.\n"
-         "Record consists of\n -Surname\n -Name\n -Phone number\n -Addres\n -Staus(private or official)\n "
-         "If status is private:\n -Birth date\n Else:\n -Post\n -Organization");
+    puts("This programm makes matrix vector mlt usind standart method and method for packed matrix.\n");
 
     matrix_t mtr;
     column_t vector;
