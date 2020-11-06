@@ -10,7 +10,7 @@
 
 #define MATRIX_FILE "matrix.txt"
 #define VECTOR_FILE "vector.txt"
-#define TIME_ITERATIONS 2000
+#define TIME_ITERATIONS 10000
 
 int create_matrix_file(void)
 {
@@ -67,7 +67,7 @@ int create_matrix_file(void)
 
     if (f)
     {
-        gen_matrix(f, n, m, percent / 100.0, min, max);
+        fgen_matrix(f, n, m, percent / 100.0, min, max);
         fclose(f);
     }
     else
@@ -158,7 +158,7 @@ int create_vector_file(void)
 
     if (f)
     {
-        gen_vector(f, n, percent / 100.0, min, max);
+        fgen_vector(f, n, percent / 100.0, min, max);
         fclose(f);
     }
     else
@@ -204,13 +204,13 @@ int read_gen_pvector(pvector_t *pvector)
 
 int time_table(void)
 {
-    for (size_t size = 50; size < 801; size *= 2)
+    for (size_t size = 200; size <= 800; size *= 2)
     {
         printf("matrix %zux%zu\n", size, size);
-        printf("zero percent   normal   packed\n");
-        for (size_t percent = 30; percent <= 60; percent += 5)
+        printf("     percent    normal    packed normal mem  packed mem\n");
+        for (size_t percent = 10; percent <= 60; percent += 10)
         {
-            FILE *f = fopen(MATRIX_FILE, "w");
+            /*FILE *f = fopen(MATRIX_FILE, "w");
             if (f)
             {
                 gen_matrix(f, size, size, percent / 100.0, -1000, 1000);
@@ -231,37 +231,43 @@ int time_table(void)
             {
                 printf("open error\n");
                 return EXIT_FAILURE;
-            }
+            }*/
             matrix_t mtr;
             column_t vec;
             pmatrix_t pmtr;
             pvector_t pvec;
-            int rc = read_gen_matrix(&mtr);
-            if (rc)
-                return rc;
-            rc = read_gen_pmatrix(&pmtr);
-            if (rc)
-            {
-                free_matrix(&mtr);
-                return rc;
-            }
-            rc = read_gen_vector(&vec);
-            if (rc)
-            {
-                free_matrix(&mtr);
-                free_pmatrix(&pmtr);
-                return rc;
-            }
-            rc = read_gen_pvector(&pvec);
-            if (rc)
-            {
-                free_matrix(&mtr);
-                free_pmatrix(&pmtr);
-                free_column(vec);
-                return rc;
-            }
+            // int rc = read_gen_matrix(&mtr);
+            // if (rc)
+            //     return rc;
+            // rc = read_gen_pmatrix(&pmtr);
+            // if (rc)
+            // {
+            //     free_matrix(&mtr);
+            //     return rc;
+            // }
+            // rc = read_gen_vector(&vec);
+            // if (rc)
+            // {
+            //     free_matrix(&mtr);
+            //     free_pmatrix(&pmtr);
+            //     return rc;
+            // }
+            // rc = read_gen_pvector(&pvec);
+            // if (rc)
+            // {
+            //     free_matrix(&mtr);
+            //     free_pmatrix(&pmtr);
+            //     free_column(vec);
+            //     return rc;
+            // }
+            allocate_matrix(&mtr, size, size);
+            allocate_column(size, &vec);
+            gen_matrix(&mtr, percent / 100.0, -1000, 1000);
+            gen_vector(&vec, percent / 100.0, -1000, 1000);
+            read_pmatrix_from_matrix(&pmtr, mtr);
+            read_pvector_from_vector(&pvec, vec);
             column_t res;
-            rc = allocate_column(mtr.rows, &res);
+            int rc = allocate_column(mtr.rows, &res);
             if (rc)
             {
                 free_matrix(&mtr);
@@ -304,7 +310,9 @@ int time_table(void)
             packed = clock() - packed;
             double packed_time = ((double) packed / CLOCKS_PER_SEC) / TIME_ITERATIONS;
  
-            printf("%12zu %7lfs %7lfs\n", percent, normal_time, packed_time);
+            size_t normal_size = sizeof(mtr) + sizeof(elem_t *) * mtr.rows + sizeof(elem_t) * mtr.rows * mtr.columns;
+            size_t packed_size = sizeof(pmtr) + pmtr.columns * 2 * sizeof(elem_t) + sizeof(row_start_t) * (mtr.rows + 1);
+            printf("%12zu %7lfs %7lfs %8zub %9zub\n", percent, normal_time, packed_time, normal_size, packed_size);
             free_matrix(&mtr);
             free_pmatrix(&pmtr);
             free_column(vec);

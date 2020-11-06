@@ -1,7 +1,7 @@
 #include <math.h>
 #include "gen_matrix.h"
 
-void gen_matrix(FILE *dst, size_t rows, size_t columns, double percent, int min, int max)
+void fgen_matrix(FILE *dst, size_t rows, size_t columns, double percent, int min, int max)
 {
     fprintf(dst, "%zu %zu\n", rows, columns);
     size_t zeros = trunc(rows * percent * columns);
@@ -25,7 +25,7 @@ void gen_matrix(FILE *dst, size_t rows, size_t columns, double percent, int min,
     }
 }
 
-void gen_vector(FILE *dst, size_t rows, double percent, int min, int max)
+void fgen_vector(FILE *dst, size_t rows, double percent, int min, int max)
 {
     fprintf(dst, "%zu\n", rows);
     size_t zeros = trunc(rows * percent);

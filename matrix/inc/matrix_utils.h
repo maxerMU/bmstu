@@ -10,6 +10,8 @@
 #define SQR_ER 22
 #define POW_ER 23
 
+void gen_vector(column_t *vec, double percent, int min, int max);
+void gen_matrix(matrix_t *mtr, double percent, int min, int max);
 int fread_matrix(matrix_t *mtr, FILE *src);
 void fwrite_matrix(matrix_t mtr, FILE *dst);
 int fread_vector(column_t *vector, FILE *src);
