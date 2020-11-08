@@ -28,6 +28,7 @@ void lstack_init(stack_list_t *stc);
 int write_lstack(stack_list_t *stc);
 void write_free_spaces(stack_list_t stc);
 int read_lstack(stack_list_t *stc);
+int alloc_node(node_t **dst);
 int popl(void *stc, elem_t *elem);
 int pushl(void *stc, elem_t elem);
 void push_el(stack_list_t *stc, node_t *node, elem_t elem);

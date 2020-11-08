@@ -14,16 +14,17 @@ void free_node(node_t *node)
     free(node);
 }
 
-void free_spaces_array(node_t **a, size_t len)
+void free_spaces_array(node_t **a, size_t *len)
 {
-    for (size_t i = 0; i < len; i++)
-        free_node(a[i]);
+//    for (size_t i = 0; i < len; i++)
+//        free_node(a[i]);
+    *len = 0;
     free(a);
 }
 
 void free_lstack(stack_list_t *stc)
 {
-    free_spaces_array(stc->free_spaces, stc->spaces_len);
+    free_spaces_array(stc->free_spaces, &stc->spaces_alloc);
     while (stc->top)
     {
         node_t *next = stc->top->next;
@@ -70,12 +71,12 @@ int pushl(void *stc, elem_t elem)
 {
     print_debug("push - %ld\n", elem);
     stack_list_t *lstc = (stack_list_t *) stc;
-    if (lstc->spaces_len)
-    {
-        push_el(lstc, lstc->free_spaces[lstc->spaces_len - 1], elem);
-        lstc->spaces_len -= 1;
-        return EXIT_SUCCESS;
-    }
+//    if (lstc->spaces_len)
+//    {
+//        push_el(lstc, lstc->free_spaces[lstc->spaces_len - 1], elem);
+//        lstc->spaces_len -= 1;
+//        return EXIT_SUCCESS;
+//    }
 
     node_t *node = NULL;
     int rc = alloc_node(&node);
@@ -96,13 +97,14 @@ int popl(void *stc, elem_t *elem)
     *elem = lstc->top->value;
     if (lstc->spaces_len >= lstc->spaces_alloc)
     {
-        int rc = change_array_size(lstc, lstc->spaces_alloc ? lstc->spaces_alloc * INC_SIZE : 1);
+        int rc = change_array_size(lstc, lstc->spaces_alloc ? lstc->spaces_alloc * INC_SIZE : 1000);
         if (rc)
             return rc;
     }
     lstc->free_spaces[lstc->spaces_len] = lstc->top;
     lstc->spaces_len += 1;
     lstc->top = lstc->top->next;
+    free_node(lstc->free_spaces[lstc->spaces_len - 1]);
     print_debug("pop - %ld\n", *elem);
 
     return EXIT_SUCCESS;
@@ -125,7 +127,6 @@ int read_lstack(stack_list_t *stc)
 
 void write_free_spaces(stack_list_t stc)
 {
-    printf("spaces vector\n");
     for (size_t i = 0; i < stc.spaces_len; i++)
         printf("%p\n", (void *) stc.free_spaces[i]);
 }

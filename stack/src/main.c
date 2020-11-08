@@ -1,8 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include "exit_codes.h"
 #include "stack_vector.h"
 #include "stack_list.h"
+
+#define TIME_ITERATIONS 100
 
 int read_vstacks(stack_vector_t *vstc1, stack_vector_t *vstc2)
 {
@@ -273,6 +276,176 @@ int sort_2_stacks(void *stc1, void *stc2, void *stc3, int (*push)(void *, elem_t
     return EXIT_SUCCESS;
 }
 
+int gen_stack(size_t size, stack_vector_t *vstc, stack_list_t *lstc)
+{
+    const long min = -1000;
+    const long max = 1000;
+    free_lstack(lstc);
+    free_vstack(vstc);
+    int rc = allocate_vstack(vstc, size);
+    if (rc)
+        return rc;
+    for (size_t i = 0; i < size; i++)
+    {
+        elem_t el = min + rand() % (max - min);
+        int rc = pushl(lstc, el);
+        if (rc)
+            return rc;
+        rc = vpush(vstc, el);
+        if (rc)
+            return rc;
+    }
+
+    return EXIT_SUCCESS;
+}
+
+int copy_vstack(stack_vector_t *dst, stack_vector_t src)
+{
+    for (elem_t *current = src.alb; current <= src.ps; current++)
+    {
+        int rc = vpush(dst, *current);
+        if (rc)
+            return rc;
+    }
+
+    return EXIT_SUCCESS;
+}
+
+int copy_lstack(stack_list_t *dst, stack_list_t src)
+{
+    if (!dst->top)
+    {
+        int rc = alloc_node(&dst->top);
+        if (rc)
+            return rc;
+    }
+    node_t *prev_dst = dst->top;
+    for (node_t *current_src = src.top, *current_dst = dst->top; current_src;\
+         current_src = current_src->next, current_dst = current_dst->next)
+    {
+        if (!current_dst)
+        {
+            int rc = alloc_node(&current_dst);
+            if (rc)
+                return rc;
+            prev_dst->next = current_dst;
+        }
+        current_dst->value = current_src->value;
+        prev_dst = current_dst;
+    }
+
+    return EXIT_SUCCESS;
+}
+
+int time_table()
+{
+    for (size_t k = 1; k <= 8; k *= 2)
+    {
+        printf("vector stack max - size * %zu\n", k);
+        for (size_t size = 100; size <= 400; size *= 2)
+        {
+            stack_vector_t vstc1;
+            init_vstack(&vstc1);
+            stack_vector_t vstc2;
+            init_vstack(&vstc2);
+            stack_vector_t vstc_res;
+            init_vstack(&vstc_res);
+            stack_list_t lstc1;
+            lstack_init(&lstc1);
+            stack_list_t lstc2;
+            lstack_init(&lstc2);
+            stack_list_t lstc_res;
+            lstack_init(&lstc_res);
+
+            int rc = gen_stack(size * k, &vstc1, &lstc1);
+            if (rc)
+                return rc;
+            rc = gen_stack(size * k, &vstc2, &lstc2);
+            if (rc)
+                return rc;
+            rc = allocate_vstack(&vstc_res, size * 2 * k + 1);
+            if (rc)
+                return rc;
+            stack_vector_t vstc1_copy;
+            rc = allocate_vstack(&vstc1_copy, size * k);
+            if (rc)
+                return rc;
+            stack_vector_t vstc2_copy;
+            rc = allocate_vstack(&vstc2_copy, size * k);
+            if (rc)
+                return rc;
+            stack_list_t lstc1_copy;
+            lstack_init(&lstc1_copy);
+            stack_list_t lstc2_copy;
+            lstack_init(&lstc2_copy);
+
+            clock_t vcopy = clock();
+            for (size_t i = 0; i < TIME_ITERATIONS; i++)
+            {
+                vstc1_copy.ps = vstc1_copy.alb - 1;
+                copy_vstack(&vstc1_copy, vstc1);
+            }
+            vcopy = clock() - vcopy;
+            double vcopy_time = ((double)vcopy / CLOCKS_PER_SEC) / TIME_ITERATIONS;
+
+            clock_t lcopy = clock();
+            for (size_t i = 0; i < TIME_ITERATIONS; i++)
+                copy_lstack(&lstc1_copy, lstc1);
+            lcopy = clock() - lcopy;
+            double lcopy_time = ((double)lcopy / CLOCKS_PER_SEC) / TIME_ITERATIONS;
+
+            clock_t vsort = clock();
+            for (size_t i = 0; i < TIME_ITERATIONS; i++)
+            {
+                vstc1_copy.ps = vstc1_copy.alb - 1;
+                vstc2_copy.ps = vstc2_copy.alb - 1;
+                rc = copy_vstack(&vstc1_copy, vstc1);
+                if (rc)
+                    return rc;
+                rc = copy_vstack(&vstc2_copy, vstc2);
+                if (rc)
+                    return rc;
+                //Очистка стека!!
+                vstc_res.ps = vstc_res.alb - 1;
+                sort_2_stacks(&vstc1_copy, &vstc2_copy, &vstc_res, vpush, vpop);
+            }
+            vsort = clock() - vsort;
+            double vsort_time = ((double)vsort / CLOCKS_PER_SEC) / TIME_ITERATIONS - 2 * vcopy_time;
+
+            clock_t lsort = clock();
+            for (size_t i = 0; i < TIME_ITERATIONS; i++)
+            {
+                copy_lstack(&lstc1_copy, lstc1);
+                copy_lstack(&lstc2_copy, lstc2);
+                sort_2_stacks(&lstc1_copy, &lstc2_copy, &lstc_res, pushl, popl);
+                //Очистка стека!!
+                free_lstack(&lstc_res);
+            }
+            lsort = clock() - lsort;
+            double lsort_time = ((double)lsort / CLOCKS_PER_SEC) / TIME_ITERATIONS - 2 * lcopy_time;
+
+            size_t vsize = sizeof(vstc1) + sizeof(elem_t) * (vstc1.aub - vstc1.alb);
+            size_t lsize = sizeof(node_t *) + sizeof(node_t) * size;
+            printf("stack sizes %zu\n", size);
+            printf("| list time | vector time | list memory | vector memory |\n");
+            printf("| %8lfs | %10lfs | %10zub | %12zub |\n", lsort_time, vsort_time, lsize, vsize);
+
+            free_vstack(&vstc1);
+            free_vstack(&vstc2);
+            free_vstack(&vstc_res);
+            free_lstack(&lstc1);
+            free_lstack(&lstc2);
+            free_lstack(&lstc_res);
+            free_vstack(&vstc1_copy);
+            free_vstack(&vstc2_copy);
+            free_lstack(&lstc1_copy);
+            free_lstack(&lstc2_copy);
+        }
+    }
+
+    return EXIT_SUCCESS;
+}
+
 int main(void)
 {
     stack_vector_t vstc1;
@@ -299,10 +472,9 @@ int main(void)
                "5 - write free spaces vector\n"
                "6 - push element to any stack\n"
                "7 - pop element from any stack\n"
-               "8 - sort two stacks in third\n"
-               "9 - normal matrix column mlt\n"
-               "10 - packed matrix column mlt\n"
-               "11 - time compare\n"
+               "8 - sort two stacks in third using stack like vector\n"
+               "9 - sort two stacks in third using stack like list\n"
+               "10 - compare effiences\n"
                "0 - exit\n"
                "Your choise: ");
         if (scanf("%d", &choise) != 1)
@@ -356,12 +528,21 @@ int main(void)
                 break;
             printf("vector stacks\n");
             write_vstack(&vstc_res);
+        }
+        else if (choise == 9)
+        {
             rc = sort_2_stacks(&lstc1, &lstc2, &lstc_res, pushl, popl);
             if (rc)
                 break;
             
             printf("list stacks\n");
             write_lstack(&lstc_res);
+        }
+        else if (choise == 10)
+        {
+            rc = time_table();
+            if (rc)
+                break;
         }
         //dev fitch
         else if (choise == 32)
@@ -376,6 +557,19 @@ int main(void)
                 break;
             printf("list stack\n");
             write_lstack(&lstc_res);
+        }
+        else if (choise == 33)
+        {
+            vstc2.ps = vstc2.alb - 1;
+            rc = copy_vstack(&vstc2, vstc1);
+            if (rc)
+                return rc;
+        }
+        else if (choise == 34)
+        {
+            rc = copy_lstack(&lstc2, lstc1);
+            if (rc)
+                break;
         }
 
     }
