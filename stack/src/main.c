@@ -482,7 +482,9 @@ int main(void)
         if (choise == 1)
         {
             rc = read_vstacks(&vstc1, &vstc2);
-            if (rc)
+            if (rc == PUSH_ER)
+                printf("Stack overflow\n");
+            else if (rc)
                 break;
             rc = allocate_vstack(&vstc_res, vstc1.aub - vstc1.alb + vstc2.aub - vstc2.alb);
             if (rc)
