@@ -1,0 +1,798 @@
+desc: (none)
+cmd: ./app.exe
+time_unit: i
+#-----------
+snapshot=0
+#-----------
+time=0
+mem_heap_B=0
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=1
+#-----------
+time=172304
+mem_heap_B=1024
+mem_heap_extra_B=8
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=2
+#-----------
+time=207327
+mem_heap_B=2304
+mem_heap_extra_B=80
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=3
+#-----------
+time=259876
+mem_heap_B=2496
+mem_heap_extra_B=128
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=4
+#-----------
+time=300795
+mem_heap_B=2912
+mem_heap_extra_B=232
+mem_stacks_B=0
+heap_tree=detailed
+n2: 2912 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 2048 0x4EB326A: _IO_file_doallocate (filedoalloc.c:101)
+  n2: 2048 0x4EC3447: _IO_doallocbuf (genops.c:365)
+   n1: 1024 0x4EC2322: _IO_file_underflow@@GLIBC_2.2.5 (fileops.c:495)
+    n1: 1024 0x4EC34C0: _IO_default_uflow (genops.c:380)
+     n1: 1024 0x4EA0CC8: _IO_vfscanf (vfscanf.c:630)
+      n1: 1024 0x4EB10B6: __isoc99_scanf (isoc99_scanf.c:37)
+       n0: 1024 0x10B0A5: main (main.c:308)
+   n1: 1024 0x4EC2566: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:759)
+    n1: 1024 0x4EC0ABB: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1266)
+     n1: 1024 0x4E90632: vfprintf (vfprintf.c:1328)
+      n1: 1024 0x4E9A014: printf (printf.c:33)
+       n0: 1024 0x10B07B: main (main.c:301)
+ n1: 864 0x10BFAB: allocate_node (queue_list.c:8)
+  n2: 864 0x10C142: push_qlist (queue_list.c:44)
+   n1: 672 0x10A4CB: model_apparat (main.c:175)
+    n0: 672 0x10B619: main (main.c:360)
+   n1: 192 0x10A357: model_apparat (main.c:155)
+    n0: 192 0x10B619: main (main.c:360)
+#-----------
+snapshot=5
+#-----------
+time=342056
+mem_heap_B=2848
+mem_heap_extra_B=216
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=6
+#-----------
+time=379130
+mem_heap_B=2752
+mem_heap_extra_B=192
+mem_stacks_B=0
+heap_tree=detailed
+n2: 2752 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 2048 0x4EB326A: _IO_file_doallocate (filedoalloc.c:101)
+  n2: 2048 0x4EC3447: _IO_doallocbuf (genops.c:365)
+   n1: 1024 0x4EC2322: _IO_file_underflow@@GLIBC_2.2.5 (fileops.c:495)
+    n1: 1024 0x4EC34C0: _IO_default_uflow (genops.c:380)
+     n1: 1024 0x4EA0CC8: _IO_vfscanf (vfscanf.c:630)
+      n1: 1024 0x4EB10B6: __isoc99_scanf (isoc99_scanf.c:37)
+       n0: 1024 0x10B0A5: main (main.c:308)
+   n1: 1024 0x4EC2566: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:759)
+    n1: 1024 0x4EC0ABB: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1266)
+     n1: 1024 0x4E90632: vfprintf (vfprintf.c:1328)
+      n1: 1024 0x4E9A014: printf (printf.c:33)
+       n0: 1024 0x10B07B: main (main.c:301)
+ n1: 704 0x10BFAB: allocate_node (queue_list.c:8)
+  n2: 704 0x10C142: push_qlist (queue_list.c:44)
+   n1: 544 0x10A4CB: model_apparat (main.c:175)
+    n0: 544 0x10B619: main (main.c:360)
+   n1: 160 0x10A357: model_apparat (main.c:155)
+    n0: 160 0x10B619: main (main.c:360)
+#-----------
+snapshot=7
+#-----------
+time=428696
+mem_heap_B=2432
+mem_heap_extra_B=112
+mem_stacks_B=0
+heap_tree=detailed
+n2: 2432 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 2048 0x4EB326A: _IO_file_doallocate (filedoalloc.c:101)
+  n2: 2048 0x4EC3447: _IO_doallocbuf (genops.c:365)
+   n1: 1024 0x4EC2322: _IO_file_underflow@@GLIBC_2.2.5 (fileops.c:495)
+    n1: 1024 0x4EC34C0: _IO_default_uflow (genops.c:380)
+     n1: 1024 0x4EA0CC8: _IO_vfscanf (vfscanf.c:630)
+      n1: 1024 0x4EB10B6: __isoc99_scanf (isoc99_scanf.c:37)
+       n0: 1024 0x10B0A5: main (main.c:308)
+   n1: 1024 0x4EC2566: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:759)
+    n1: 1024 0x4EC0ABB: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1266)
+     n1: 1024 0x4E90632: vfprintf (vfprintf.c:1328)
+      n1: 1024 0x4E9A014: printf (printf.c:33)
+       n0: 1024 0x10B07B: main (main.c:301)
+ n1: 384 0x10BFAB: allocate_node (queue_list.c:8)
+  n2: 384 0x10C142: push_qlist (queue_list.c:44)
+   n1: 320 0x10A4CB: model_apparat (main.c:175)
+    n0: 320 0x10B619: main (main.c:360)
+   n1: 64 0x10A357: model_apparat (main.c:155)
+    n0: 64 0x10B619: main (main.c:360)
+#-----------
+snapshot=8
+#-----------
+time=464118
+mem_heap_B=2240
+mem_heap_extra_B=64
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=9
+#-----------
+time=500963
+mem_heap_B=2208
+mem_heap_extra_B=56
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=10
+#-----------
+time=526719
+mem_heap_B=2112
+mem_heap_extra_B=32
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=11
+#-----------
+time=563739
+mem_heap_B=2112
+mem_heap_extra_B=32
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=12
+#-----------
+time=586086
+mem_heap_B=2304
+mem_heap_extra_B=80
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=13
+#-----------
+time=626909
+mem_heap_B=2368
+mem_heap_extra_B=96
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=14
+#-----------
+time=658743
+mem_heap_B=2240
+mem_heap_extra_B=64
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=15
+#-----------
+time=709208
+mem_heap_B=2208
+mem_heap_extra_B=56
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=16
+#-----------
+time=744647
+mem_heap_B=2336
+mem_heap_extra_B=88
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=17
+#-----------
+time=772533
+mem_heap_B=2336
+mem_heap_extra_B=88
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=18
+#-----------
+time=800509
+mem_heap_B=2176
+mem_heap_extra_B=48
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=19
+#-----------
+time=834371
+mem_heap_B=2144
+mem_heap_extra_B=40
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=20
+#-----------
+time=862349
+mem_heap_B=2208
+mem_heap_extra_B=56
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=21
+#-----------
+time=901879
+mem_heap_B=2208
+mem_heap_extra_B=56
+mem_stacks_B=0
+heap_tree=detailed
+n2: 2208 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 2048 0x4EB326A: _IO_file_doallocate (filedoalloc.c:101)
+  n2: 2048 0x4EC3447: _IO_doallocbuf (genops.c:365)
+   n1: 1024 0x4EC2322: _IO_file_underflow@@GLIBC_2.2.5 (fileops.c:495)
+    n1: 1024 0x4EC34C0: _IO_default_uflow (genops.c:380)
+     n1: 1024 0x4EA0CC8: _IO_vfscanf (vfscanf.c:630)
+      n1: 1024 0x4EB10B6: __isoc99_scanf (isoc99_scanf.c:37)
+       n0: 1024 0x10B0A5: main (main.c:308)
+   n1: 1024 0x4EC2566: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:759)
+    n1: 1024 0x4EC0ABB: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1266)
+     n1: 1024 0x4E90632: vfprintf (vfprintf.c:1328)
+      n1: 1024 0x4E9A014: printf (printf.c:33)
+       n0: 1024 0x10B07B: main (main.c:301)
+ n1: 160 0x10BFAB: allocate_node (queue_list.c:8)
+  n2: 160 0x10C142: push_qlist (queue_list.c:44)
+   n1: 160 0x10A4CB: model_apparat (main.c:175)
+    n0: 160 0x10B619: main (main.c:360)
+   n0: 0 in 1 place, below massif's threshold (1.00%)
+#-----------
+snapshot=22
+#-----------
+time=940223
+mem_heap_B=2304
+mem_heap_extra_B=80
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=23
+#-----------
+time=967616
+mem_heap_B=2144
+mem_heap_extra_B=40
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=24
+#-----------
+time=1013165
+mem_heap_B=2048
+mem_heap_extra_B=16
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=25
+#-----------
+time=1049613
+mem_heap_B=2048
+mem_heap_extra_B=16
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=26
+#-----------
+time=1076935
+mem_heap_B=2240
+mem_heap_extra_B=64
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=27
+#-----------
+time=1109434
+mem_heap_B=2240
+mem_heap_extra_B=64
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=28
+#-----------
+time=1164252
+mem_heap_B=2304
+mem_heap_extra_B=80
+mem_stacks_B=0
+heap_tree=detailed
+n2: 2304 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 2048 0x4EB326A: _IO_file_doallocate (filedoalloc.c:101)
+  n2: 2048 0x4EC3447: _IO_doallocbuf (genops.c:365)
+   n1: 1024 0x4EC2322: _IO_file_underflow@@GLIBC_2.2.5 (fileops.c:495)
+    n1: 1024 0x4EC34C0: _IO_default_uflow (genops.c:380)
+     n1: 1024 0x4EA0CC8: _IO_vfscanf (vfscanf.c:630)
+      n1: 1024 0x4EB10B6: __isoc99_scanf (isoc99_scanf.c:37)
+       n0: 1024 0x10B0A5: main (main.c:308)
+   n1: 1024 0x4EC2566: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:759)
+    n1: 1024 0x4EC0ABB: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1266)
+     n1: 1024 0x4E90632: vfprintf (vfprintf.c:1328)
+      n1: 1024 0x4E9A014: printf (printf.c:33)
+       n0: 1024 0x10B07B: main (main.c:301)
+ n1: 256 0x10BFAB: allocate_node (queue_list.c:8)
+  n2: 256 0x10C142: push_qlist (queue_list.c:44)
+   n1: 224 0x10A4CB: model_apparat (main.c:175)
+    n0: 224 0x10B619: main (main.c:360)
+   n1: 32 0x10A357: model_apparat (main.c:155)
+    n0: 32 0x10B619: main (main.c:360)
+#-----------
+snapshot=29
+#-----------
+time=1200858
+mem_heap_B=2688
+mem_heap_extra_B=176
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=30
+#-----------
+time=1237489
+mem_heap_B=2880
+mem_heap_extra_B=224
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=31
+#-----------
+time=1264814
+mem_heap_B=2592
+mem_heap_extra_B=152
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=32
+#-----------
+time=1296352
+mem_heap_B=2272
+mem_heap_extra_B=72
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=33
+#-----------
+time=1342115
+mem_heap_B=2240
+mem_heap_extra_B=64
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=34
+#-----------
+time=1369598
+mem_heap_B=2112
+mem_heap_extra_B=32
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=35
+#-----------
+time=1405946
+mem_heap_B=2048
+mem_heap_extra_B=16
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=36
+#-----------
+time=1453826
+mem_heap_B=2336
+mem_heap_extra_B=88
+mem_stacks_B=0
+heap_tree=detailed
+n2: 2336 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 2048 0x4EB326A: _IO_file_doallocate (filedoalloc.c:101)
+  n2: 2048 0x4EC3447: _IO_doallocbuf (genops.c:365)
+   n1: 1024 0x4EC2322: _IO_file_underflow@@GLIBC_2.2.5 (fileops.c:495)
+    n1: 1024 0x4EC34C0: _IO_default_uflow (genops.c:380)
+     n1: 1024 0x4EA0CC8: _IO_vfscanf (vfscanf.c:630)
+      n1: 1024 0x4EB10B6: __isoc99_scanf (isoc99_scanf.c:37)
+       n0: 1024 0x10B0A5: main (main.c:308)
+   n1: 1024 0x4EC2566: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:759)
+    n1: 1024 0x4EC0ABB: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1266)
+     n1: 1024 0x4E90632: vfprintf (vfprintf.c:1328)
+      n1: 1024 0x4E9A014: printf (printf.c:33)
+       n0: 1024 0x10B07B: main (main.c:301)
+ n1: 288 0x10BFAB: allocate_node (queue_list.c:8)
+  n2: 288 0x10C142: push_qlist (queue_list.c:44)
+   n1: 224 0x10A4CB: model_apparat (main.c:175)
+    n0: 224 0x10B619: main (main.c:360)
+   n1: 64 0x10A357: model_apparat (main.c:155)
+    n0: 64 0x10B619: main (main.c:360)
+#-----------
+snapshot=37
+#-----------
+time=1477199
+mem_heap_B=2304
+mem_heap_extra_B=80
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=38
+#-----------
+time=1512181
+mem_heap_B=2240
+mem_heap_extra_B=64
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=39
+#-----------
+time=1547040
+mem_heap_B=2240
+mem_heap_extra_B=64
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=40
+#-----------
+time=1570149
+mem_heap_B=2208
+mem_heap_extra_B=56
+mem_stacks_B=0
+heap_tree=detailed
+n2: 2208 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 2048 0x4EB326A: _IO_file_doallocate (filedoalloc.c:101)
+  n2: 2048 0x4EC3447: _IO_doallocbuf (genops.c:365)
+   n1: 1024 0x4EC2322: _IO_file_underflow@@GLIBC_2.2.5 (fileops.c:495)
+    n1: 1024 0x4EC34C0: _IO_default_uflow (genops.c:380)
+     n1: 1024 0x4EA0CC8: _IO_vfscanf (vfscanf.c:630)
+      n1: 1024 0x4EB10B6: __isoc99_scanf (isoc99_scanf.c:37)
+       n0: 1024 0x10B0A5: main (main.c:308)
+   n1: 1024 0x4EC2566: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:759)
+    n1: 1024 0x4EC0ABB: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1266)
+     n1: 1024 0x4E90632: vfprintf (vfprintf.c:1328)
+      n1: 1024 0x4E9A014: printf (printf.c:33)
+       n0: 1024 0x10B07B: main (main.c:301)
+ n1: 160 0x10BFAB: allocate_node (queue_list.c:8)
+  n2: 160 0x10C142: push_qlist (queue_list.c:44)
+   n1: 128 0x10A4CB: model_apparat (main.c:175)
+    n0: 128 0x10B619: main (main.c:360)
+   n1: 32 0x10A357: model_apparat (main.c:155)
+    n0: 32 0x10B619: main (main.c:360)
+#-----------
+snapshot=41
+#-----------
+time=1604737
+mem_heap_B=2304
+mem_heap_extra_B=80
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=42
+#-----------
+time=1639268
+mem_heap_B=2208
+mem_heap_extra_B=56
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=43
+#-----------
+time=1662273
+mem_heap_B=2208
+mem_heap_extra_B=56
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=44
+#-----------
+time=1696887
+mem_heap_B=2240
+mem_heap_extra_B=64
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=45
+#-----------
+time=1743006
+mem_heap_B=2496
+mem_heap_extra_B=128
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=46
+#-----------
+time=1766169
+mem_heap_B=2592
+mem_heap_extra_B=152
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=47
+#-----------
+time=1799318
+mem_heap_B=3104
+mem_heap_extra_B=280
+mem_stacks_B=0
+heap_tree=detailed
+n2: 3104 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 2048 0x4EB326A: _IO_file_doallocate (filedoalloc.c:101)
+  n2: 2048 0x4EC3447: _IO_doallocbuf (genops.c:365)
+   n1: 1024 0x4EC2322: _IO_file_underflow@@GLIBC_2.2.5 (fileops.c:495)
+    n1: 1024 0x4EC34C0: _IO_default_uflow (genops.c:380)
+     n1: 1024 0x4EA0CC8: _IO_vfscanf (vfscanf.c:630)
+      n1: 1024 0x4EB10B6: __isoc99_scanf (isoc99_scanf.c:37)
+       n0: 1024 0x10B0A5: main (main.c:308)
+   n1: 1024 0x4EC2566: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:759)
+    n1: 1024 0x4EC0ABB: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1266)
+     n1: 1024 0x4E90632: vfprintf (vfprintf.c:1328)
+      n1: 1024 0x4E9A014: printf (printf.c:33)
+       n0: 1024 0x10B07B: main (main.c:301)
+ n1: 1056 0x10BFAB: allocate_node (queue_list.c:8)
+  n2: 1056 0x10C142: push_qlist (queue_list.c:44)
+   n1: 800 0x10A4CB: model_apparat (main.c:175)
+    n0: 800 0x10B619: main (main.c:360)
+   n1: 256 0x10A357: model_apparat (main.c:155)
+    n0: 256 0x10B619: main (main.c:360)
+#-----------
+snapshot=48
+#-----------
+time=1825206
+mem_heap_B=3264
+mem_heap_extra_B=320
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=49
+#-----------
+time=1859303
+mem_heap_B=3424
+mem_heap_extra_B=360
+mem_stacks_B=0
+heap_tree=detailed
+n2: 3424 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 2048 0x4EB326A: _IO_file_doallocate (filedoalloc.c:101)
+  n2: 2048 0x4EC3447: _IO_doallocbuf (genops.c:365)
+   n1: 1024 0x4EC2322: _IO_file_underflow@@GLIBC_2.2.5 (fileops.c:495)
+    n1: 1024 0x4EC34C0: _IO_default_uflow (genops.c:380)
+     n1: 1024 0x4EA0CC8: _IO_vfscanf (vfscanf.c:630)
+      n1: 1024 0x4EB10B6: __isoc99_scanf (isoc99_scanf.c:37)
+       n0: 1024 0x10B0A5: main (main.c:308)
+   n1: 1024 0x4EC2566: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:759)
+    n1: 1024 0x4EC0ABB: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1266)
+     n1: 1024 0x4E90632: vfprintf (vfprintf.c:1328)
+      n1: 1024 0x4E9A014: printf (printf.c:33)
+       n0: 1024 0x10B07B: main (main.c:301)
+ n1: 1376 0x10BFAB: allocate_node (queue_list.c:8)
+  n2: 1376 0x10C142: push_qlist (queue_list.c:44)
+   n1: 1120 0x10A4CB: model_apparat (main.c:175)
+    n0: 1120 0x10B619: main (main.c:360)
+   n1: 256 0x10A357: model_apparat (main.c:155)
+    n0: 256 0x10B619: main (main.c:360)
+#-----------
+snapshot=50
+#-----------
+time=1863164
+mem_heap_B=3456
+mem_heap_extra_B=368
+mem_stacks_B=0
+heap_tree=detailed
+n2: 3456 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 2048 0x4EB326A: _IO_file_doallocate (filedoalloc.c:101)
+  n2: 2048 0x4EC3447: _IO_doallocbuf (genops.c:365)
+   n1: 1024 0x4EC2322: _IO_file_underflow@@GLIBC_2.2.5 (fileops.c:495)
+    n1: 1024 0x4EC34C0: _IO_default_uflow (genops.c:380)
+     n1: 1024 0x4EA0CC8: _IO_vfscanf (vfscanf.c:630)
+      n1: 1024 0x4EB10B6: __isoc99_scanf (isoc99_scanf.c:37)
+       n0: 1024 0x10B0A5: main (main.c:308)
+   n1: 1024 0x4EC2566: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:759)
+    n1: 1024 0x4EC0ABB: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1266)
+     n1: 1024 0x4E90632: vfprintf (vfprintf.c:1328)
+      n1: 1024 0x4E9A014: printf (printf.c:33)
+       n0: 1024 0x10B07B: main (main.c:301)
+ n1: 1408 0x10BFAB: allocate_node (queue_list.c:8)
+  n2: 1408 0x10C142: push_qlist (queue_list.c:44)
+   n1: 1088 0x10A4CB: model_apparat (main.c:175)
+    n0: 1088 0x10B619: main (main.c:360)
+   n1: 320 0x10A357: model_apparat (main.c:155)
+    n0: 320 0x10B619: main (main.c:360)
+#-----------
+snapshot=51
+#-----------
+time=1864133
+mem_heap_B=3488
+mem_heap_extra_B=376
+mem_stacks_B=0
+heap_tree=detailed
+n2: 3488 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 2048 0x4EB326A: _IO_file_doallocate (filedoalloc.c:101)
+  n2: 2048 0x4EC3447: _IO_doallocbuf (genops.c:365)
+   n1: 1024 0x4EC2322: _IO_file_underflow@@GLIBC_2.2.5 (fileops.c:495)
+    n1: 1024 0x4EC34C0: _IO_default_uflow (genops.c:380)
+     n1: 1024 0x4EA0CC8: _IO_vfscanf (vfscanf.c:630)
+      n1: 1024 0x4EB10B6: __isoc99_scanf (isoc99_scanf.c:37)
+       n0: 1024 0x10B0A5: main (main.c:308)
+   n1: 1024 0x4EC2566: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:759)
+    n1: 1024 0x4EC0ABB: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1266)
+     n1: 1024 0x4E90632: vfprintf (vfprintf.c:1328)
+      n1: 1024 0x4E9A014: printf (printf.c:33)
+       n0: 1024 0x10B07B: main (main.c:301)
+ n1: 1440 0x10BFAB: allocate_node (queue_list.c:8)
+  n2: 1440 0x10C142: push_qlist (queue_list.c:44)
+   n1: 1120 0x10A4CB: model_apparat (main.c:175)
+    n0: 1120 0x10B619: main (main.c:360)
+   n1: 320 0x10A357: model_apparat (main.c:155)
+    n0: 320 0x10B619: main (main.c:360)
+#-----------
+snapshot=52
+#-----------
+time=1865180
+mem_heap_B=3552
+mem_heap_extra_B=392
+mem_stacks_B=0
+heap_tree=detailed
+n2: 3552 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 2048 0x4EB326A: _IO_file_doallocate (filedoalloc.c:101)
+  n2: 2048 0x4EC3447: _IO_doallocbuf (genops.c:365)
+   n1: 1024 0x4EC2322: _IO_file_underflow@@GLIBC_2.2.5 (fileops.c:495)
+    n1: 1024 0x4EC34C0: _IO_default_uflow (genops.c:380)
+     n1: 1024 0x4EA0CC8: _IO_vfscanf (vfscanf.c:630)
+      n1: 1024 0x4EB10B6: __isoc99_scanf (isoc99_scanf.c:37)
+       n0: 1024 0x10B0A5: main (main.c:308)
+   n1: 1024 0x4EC2566: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:759)
+    n1: 1024 0x4EC0ABB: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1266)
+     n1: 1024 0x4E90632: vfprintf (vfprintf.c:1328)
+      n1: 1024 0x4E9A014: printf (printf.c:33)
+       n0: 1024 0x10B07B: main (main.c:301)
+ n1: 1504 0x10BFAB: allocate_node (queue_list.c:8)
+  n2: 1504 0x10C142: push_qlist (queue_list.c:44)
+   n1: 1152 0x10A4CB: model_apparat (main.c:175)
+    n0: 1152 0x10B619: main (main.c:360)
+   n1: 352 0x10A357: model_apparat (main.c:155)
+    n0: 352 0x10B619: main (main.c:360)
+#-----------
+snapshot=53
+#-----------
+time=1869930
+mem_heap_B=3584
+mem_heap_extra_B=400
+mem_stacks_B=0
+heap_tree=peak
+n2: 3584 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 2048 0x4EB326A: _IO_file_doallocate (filedoalloc.c:101)
+  n2: 2048 0x4EC3447: _IO_doallocbuf (genops.c:365)
+   n1: 1024 0x4EC2322: _IO_file_underflow@@GLIBC_2.2.5 (fileops.c:495)
+    n1: 1024 0x4EC34C0: _IO_default_uflow (genops.c:380)
+     n1: 1024 0x4EA0CC8: _IO_vfscanf (vfscanf.c:630)
+      n1: 1024 0x4EB10B6: __isoc99_scanf (isoc99_scanf.c:37)
+       n0: 1024 0x10B0A5: main (main.c:308)
+   n1: 1024 0x4EC2566: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:759)
+    n1: 1024 0x4EC0ABB: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1266)
+     n1: 1024 0x4E90632: vfprintf (vfprintf.c:1328)
+      n1: 1024 0x4E9A014: printf (printf.c:33)
+       n0: 1024 0x10B07B: main (main.c:301)
+ n1: 1536 0x10BFAB: allocate_node (queue_list.c:8)
+  n2: 1536 0x10C142: push_qlist (queue_list.c:44)
+   n1: 1120 0x10A4CB: model_apparat (main.c:175)
+    n0: 1120 0x10B619: main (main.c:360)
+   n1: 416 0x10A357: model_apparat (main.c:155)
+    n0: 416 0x10B619: main (main.c:360)
+#-----------
+snapshot=54
+#-----------
+time=1892341
+mem_heap_B=3456
+mem_heap_extra_B=368
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=55
+#-----------
+time=1914778
+mem_heap_B=3392
+mem_heap_extra_B=352
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=56
+#-----------
+time=1937201
+mem_heap_B=3296
+mem_heap_extra_B=328
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=57
+#-----------
+time=1959585
+mem_heap_B=3232
+mem_heap_extra_B=312
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=58
+#-----------
+time=1981996
+mem_heap_B=3136
+mem_heap_extra_B=288
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=59
+#-----------
+time=2004448
+mem_heap_B=3168
+mem_heap_extra_B=296
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=60
+#-----------
+time=2031004
+mem_heap_B=3168
+mem_heap_extra_B=296
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=61
+#-----------
+time=2068933
+mem_heap_B=2098
+mem_heap_extra_B=38
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=62
+#-----------
+time=2114202
+mem_heap_B=2098
+mem_heap_extra_B=38
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=63
+#-----------
+time=2166375
+mem_heap_B=2098
+mem_heap_extra_B=38
+mem_stacks_B=0
+heap_tree=detailed
+n3: 2098 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 2048 0x4EB326A: _IO_file_doallocate (filedoalloc.c:101)
+  n2: 2048 0x4EC3447: _IO_doallocbuf (genops.c:365)
+   n1: 1024 0x4EC2322: _IO_file_underflow@@GLIBC_2.2.5 (fileops.c:495)
+    n1: 1024 0x4EC34C0: _IO_default_uflow (genops.c:380)
+     n1: 1024 0x4EA0CC8: _IO_vfscanf (vfscanf.c:630)
+      n1: 1024 0x4EB10B6: __isoc99_scanf (isoc99_scanf.c:37)
+       n0: 1024 0x10B0A5: main (main.c:308)
+   n1: 1024 0x4EC2566: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:759)
+    n1: 1024 0x4EC0ABB: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1266)
+     n1: 1024 0x4E90632: vfprintf (vfprintf.c:1328)
+      n1: 1024 0x4E9A014: printf (printf.c:33)
+       n0: 1024 0x10B07B: main (main.c:301)
+ n1: 50 0x10D1DA: gcov_do_dump (in /home/max/repos/labs/queue/app.exe)
+  n1: 50 0x10E2F0: __gcov_exit (in /home/max/repos/labs/queue/app.exe)
+   n1: 50 0x10C3E9: _GLOBAL__sub_D_00100_1_allocate_node (queue_list.c:91)
+    n1: 50 0x4010D31: _dl_fini (dl-fini.c:138)
+     n1: 50 0x4E7815F: __run_exit_handlers (exit.c:108)
+      n1: 50 0x4E78258: exit (exit.c:139)
+       n0: 50 0x4E56BFC: (below main) (libc-start.c:344)
+ n0: 0 in 2 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=64
+#-----------
+time=2227819
+mem_heap_B=2098
+mem_heap_extra_B=38
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=65
+#-----------
+time=2257467
+mem_heap_B=2098
+mem_heap_extra_B=38
+mem_stacks_B=0
+heap_tree=empty
