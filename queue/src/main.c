@@ -140,6 +140,9 @@ int model_apparat(long beg_min, long beg_max, long proc_min, long proc_max, void
 
     size_t last_print = count_out;
 
+    double my_sum = 0.0;
+    size_t my_k = 0;
+
     while (count_out < 1000)
     {
         if (count_out % 100 == 0 && count_out != last_print)
@@ -159,6 +162,8 @@ int model_apparat(long beg_min, long beg_max, long proc_min, long proc_max, void
                 return rc;
             }
             req_init(&cur_req, beg_min, beg_max, proc_min, proc_max);
+            my_sum += cur_req.time_begin;
+            my_k++;
             cur_len++;
             avg_count_len++;
             avg_sum_len += cur_len;
@@ -215,10 +220,12 @@ int model_apparat(long beg_min, long beg_max, long proc_min, long proc_max, void
     printf("apparat processes: %zu\n", count_proc);
     printf("downtime - %lf\n", downtime);
     printf("\nAccuracy\n");
-    double ideal_in = time_all / ((beg_max - beg_min) / 2.0);
+    double ideal_in = time_all / ((beg_max + beg_min) / 2.0);
     printf("elements in accuracy - %lf%%\n", 100 * fabs(count_in - ideal_in) / ideal_in);
-    double ideal_proc = downtime + count_proc * ((proc_max - proc_min) / 2.0);
+    double ideal_proc = downtime + count_proc * ((proc_max + proc_min) / 2.0);
     printf("apparat processes accuracy - %lf%%\n", 100 * fabs(time_all- ideal_proc) / ideal_proc);
+
+    printf("time begin - %lf\n", my_sum / my_k);
 
     return EXIT_SUCCESS;
 }
