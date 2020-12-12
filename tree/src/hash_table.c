@@ -196,7 +196,6 @@ void search_in_table(hash_table_t table, elem_t elem, size_t *comparisons, int *
 //not universal
 void write_table(FILE *dst, hash_table_t table)
 {
-    fprintf(dst, "func const - %lf\n", table.func_const);
     fprintf(dst, "| index | value | state |\n");
     for (size_t i = 0; i < table.size; i++)
         fprintf(dst, "|%7zu|%7ld|%7d|\n", i, table.table[i].elem, table.table[i].field_type);

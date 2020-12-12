@@ -225,7 +225,7 @@ int work_with_hash_table()
     if (scanf("%lf", &max_avg_cmp) != 1)
         return EXIT_FAILURE;
     hash_table_t table;
-    int rc = create_table(&table, size, func_mlt, gen_f0_t1);
+    int rc = create_table(&table, size, func_mod, NULL);
     if (rc)
     {
         printf("can't create table\n");
@@ -260,7 +260,7 @@ int work_with_hash_table()
             }
             while (count_avg_comparisons(table) > max_avg_cmp)
             {
-                int rc = restruct_table(&table, func_mlt, gen_f0_t1);
+                int rc = restruct_table(&table, func_mod, NULL);
                 if (rc)
                     break;
             }
@@ -300,6 +300,7 @@ int work_with_hash_table()
         }
         else if (choise == 5)
         {
+            // printf("funct const - %lf\n", table.func_const);
             write_table(stdout, table);
         }
     }

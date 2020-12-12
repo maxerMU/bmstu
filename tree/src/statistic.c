@@ -93,7 +93,7 @@ int file_stat(char *file_name, size_t *memory, size_t elems,
     *avg_cmp = cmp_sum / elems;
 
     //memory
-    *memory = 0;
+    *memory = 8;
 
     free(a);
 
