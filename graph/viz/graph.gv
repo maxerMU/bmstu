@@ -1,0 +1,25 @@
+graph way_graph {
+0
+1
+1 [shape = "box", penwidth = 3]
+1 [shape = "box", penwidth = 3]
+2
+2 -- 1 [color = "red", label = "2", penwidth = "1"]
+3
+5 [shape = "box", penwidth = 3]
+3 -- 2 [color = "red", label = "3", penwidth = "1"]
+5 [shape = "box", penwidth = 3]
+4
+4 -- 3 [color = "purple", label = "2", penwidth = "1"]
+5
+5 [shape = "box", penwidth = 3]
+5 -- 3 [color = "red", label = "10", penwidth = "1"]
+1 [shape = "box", penwidth = 3]
+5 -- 1 [color = "red", label = "1", penwidth = "5"]
+5 -- 4 [color = "purple", label = "10", penwidth = "1"]
+5 [shape = "box", penwidth = 3]
+5 -- 3 [color = "purple", label = "3", penwidth = "5"]
+5 -- 2 [color = "purple", label = "11", penwidth = "1"]
+1 [shape = "box", penwidth = 3]
+5 -- 1 [color = "purple", label = "10", penwidth = "1"]
+}
