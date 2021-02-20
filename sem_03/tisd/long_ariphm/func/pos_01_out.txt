@@ -1,0 +1,6 @@
+This program multiply real and integer
+Real consists of mantissa and exponent. Number of digits in mantissa can not be more than 30.
+Exponent is integer between -99999 and 99999. Real is <mantissa>*10^<exponent>.
+Number of digits in integer can not be more than 30. Mantissa examples: 1.234; .01; -.2; 123.; 123
+Exponent examples: 0; 10; -12. Integer examples: 0; 10; -12
+Input mantissa: Input exp without e letter: Input integer: Multiply result: 0.918e2

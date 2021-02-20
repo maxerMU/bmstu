@@ -1,0 +1,40 @@
+Your choise: vector stack max - size * 1
+stack sizes 100
+| list time | vector time | list memory | vector memory |
+| 0.000414s |   0.000148s |       1608b |          824b |
+stack sizes 200
+| list time | vector time | list memory | vector memory |
+| 0.001514s |   0.000386s |       3208b |         1624b |
+stack sizes 400
+| list time | vector time | list memory | vector memory |
+| 0.005699s |   0.001459s |       6408b |         3224b |
+vector stack max - size * 2
+stack sizes 100
+| list time | vector time | list memory | vector memory |
+| 0.001619s |   0.000396s |       1608b |         1624b |
+stack sizes 200
+| list time | vector time | list memory | vector memory |
+| 0.005913s |   0.001486s |       3208b |         3224b |
+stack sizes 400
+| list time | vector time | list memory | vector memory |
+| 0.023756s |   0.006085s |       6408b |         6424b |
+vector stack max - size * 4
+stack sizes 100
+| list time | vector time | list memory | vector memory |
+| 0.007450s |   0.001850s |       1608b |         3224b |
+stack sizes 200
+| list time | vector time | list memory | vector memory |
+| 0.025166s |   0.006364s |       3208b |         6424b |
+stack sizes 400
+| list time | vector time | list memory | vector memory |
+| 0.093564s |   0.023685s |       6408b |        12824b |
+vector stack max - size * 8
+stack sizes 100
+| list time | vector time | list memory | vector memory |
+| 0.024033s |   0.005998s |       1608b |         6424b |
+stack sizes 200
+| list time | vector time | list memory | vector memory |
+| 0.093401s |   0.022835s |       3208b |        12824b |
+stack sizes 400
+| list time | vector time | list memory | vector memory |
+| 0.405991s |   0.094514s |       6408b |        25624b |
