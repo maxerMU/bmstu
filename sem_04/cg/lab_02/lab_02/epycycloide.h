@@ -33,16 +33,18 @@ struct epycycloide
 {
     epycycloide(double angle_min, double angle_max, double angle_step, double a, double b, canvas &field);
     ~epycycloide();
-    void draw();
     void find_center(double &xc, double &yc);
+    void move_to_center(bool remember);
     void move(double dx, double dy, bool remember);
     void scale(double xm, double ym, double kx, double ky, bool remember);
     void rotate(double xm, double ym, double angle, bool remember);
+    void to_begining(bool clear_history);
     void back();
+    int is_empty_history();
 
 private:
     void get_points();
-    void move_to_center(bool remember);
+    void draw();
 
     double angle_min;
     double angle_max;

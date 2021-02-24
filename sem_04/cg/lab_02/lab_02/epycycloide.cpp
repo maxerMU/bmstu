@@ -33,6 +33,8 @@ void epycycloide::move(double dx, double dy, bool remember)
 
     if (remember)
         history.push_back(new move_state(dx, dy, 0, 0, 1, 1, 0));
+
+    draw();
 }
 
 void epycycloide::scale(double xm, double ym, double kx, double ky, bool remember)
@@ -45,6 +47,8 @@ void epycycloide::scale(double xm, double ym, double kx, double ky, bool remembe
 
     if (remember)
         history.push_back(new move_state(0, 0, xm, ym, kx, ky, 0));
+
+    draw();
 }
 
 void epycycloide::rotate(double xm, double ym, double angle, bool remember)
@@ -61,6 +65,8 @@ void epycycloide::rotate(double xm, double ym, double angle, bool remember)
 
     if (remember)
         history.push_back(new move_state(0, 0, xm, ym, 1, 1, angle));
+
+    draw();
 }
 
 void epycycloide::get_points()
@@ -76,6 +82,25 @@ void epycycloide::get_points()
         if (fabs(x - points[points.size() - 1]->x) > 1 || fabs(y - points[points.size() - 1]->y) > 1)
             points.push_back(new ep_point(x , y));
     }
+}
+
+void epycycloide::to_begining(bool clear_history)
+{
+    for (ep_point *point : points)
+        delete point;
+    points.clear();
+    points.push_back(new ep_point(0, 0));
+    get_points();
+    move_to_center(false);
+
+    if (clear_history)
+    {
+        for (move_state *state : history)
+            delete state;
+        history.clear();
+    }
+
+    draw();
 }
 
 void epycycloide::find_center(double &xc, double &yc)
@@ -147,4 +172,9 @@ void epycycloide::back()
     draw();
 
     delete state;
+}
+
+int epycycloide::is_empty_history()
+{
+    return !history.size();
 }

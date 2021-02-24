@@ -1,5 +1,6 @@
 #include <iostream>
 #include <math.h>
+#include <QMessageBox>
 #include <QString>
 #include <QDebug>
 #include <QStringList>
@@ -29,7 +30,7 @@ MainWindow::MainWindow(QWidget *parent)
     field = new canvas(this);
     field->setGeometry(QRect(10, 30, 731, 731));
 
-    ep = new epycycloide(0, 2 * M_PI, M_PI / 96, 50, 150, *field);
+    ep = new epycycloide(0, 2 * M_PI, M_PI / 96, 20, 60, *field);
     write_center();
 }
 
@@ -43,11 +44,22 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_move_btn_clicked()
 {
-    double dx = ui->dx_input->text().toDouble();
-    double dy = ui->dy_input->text().toDouble();
+    bool ok;
+    double dx = ui->dx_input->text().toDouble(&ok);
+    if (!ok)
+    {
+        type_error_msg();
+        return;
+    }
+    double dy = ui->dy_input->text().toDouble(&ok);
+    if (!ok)
+    {
+        type_error_msg();
+        return;
+    }
 
     ep->move(dx, dy, true);
-    ep->draw();
+    //ep->draw();
     write_center();
 }
 
@@ -69,29 +81,113 @@ void MainWindow::write_center()
 
 void MainWindow::on_scale_btn_clicked()
 {
-    double xm = ui->xc_input->text().toDouble();
-    double ym = ui->yc_input->text().toDouble();
-    double kx = ui->kx_input->text().toDouble();
-    double ky = ui->ky_input->text().toDouble();
+    bool ok;
+    double xm = ui->xc_input->text().toDouble(&ok);
+    if (!ok)
+    {
+        type_error_msg();
+        return;
+    }
+    double ym = ui->yc_input->text().toDouble(&ok);
+    if (!ok)
+    {
+        type_error_msg();
+        return;
+    }
+    double kx = ui->kx_input->text().toDouble(&ok);
+    if (!ok)
+    {
+        type_error_msg();
+        return;
+    }
+    double ky = ui->ky_input->text().toDouble(&ok);
+    if (!ok)
+    {
+        type_error_msg();
+        return;
+    }
 
     ep->scale(xm, ym, kx, ky, true);
-    ep->draw();
+    //ep->draw();
     write_center();
 }
 
 void MainWindow::on_turn_btn_clicked()
 {
-    double xm = ui->xc_input->text().toDouble();
-    double ym = ui->yc_input->text().toDouble();
-    double angle = ui->angle_input->text().toDouble();
+    bool ok;
+    double xm = ui->xc_input->text().toDouble(&ok);
+    if (!ok)
+    {
+        type_error_msg();
+        return;
+    }
+    double ym = ui->yc_input->text().toDouble(&ok);
+    if (!ok)
+    {
+        type_error_msg();
+        return;
+    }
+    double angle = ui->angle_input->text().toDouble(&ok);
+    if (!ok)
+    {
+        type_error_msg();
+        return;
+    }
 
     ep->rotate(xm, ym, angle, true);
-    ep->draw();
+    //ep->draw();
     write_center();
 }
 
 void MainWindow::on_back_btn_clicked()
 {
-    ep->back();
+    if (!ep->is_empty_history())
+    {
+        ep->back();
+        write_center();
+    }
+    else
+        empty_history_msg();
+}
+
+void MainWindow::on_center_btn_clicked()
+{
+    ep->move_to_center(true);
+    //ep->draw();
     write_center();
+}
+
+void MainWindow::on_start_btn_clicked()
+{
+    ep->to_begining(true);
+    //ep->draw();
+    write_center();
+}
+
+void MainWindow::empty_history_msg()
+{
+    QMessageBox msg;
+    msg.setText(QString("Вы находитесь в начальном состоянии"));
+    msg.exec();
+}
+
+void MainWindow::task_msg()
+{
+    QMessageBox msg;
+    msg.setText(QString("Нарисовать эпициклоиду, осуществить ее перенос, масштабирование и поворот.\n"
+                        "Используется экранная система координат."));
+    msg.exec();
+}
+
+void MainWindow::type_error_msg()
+{
+    QMessageBox msg;
+    msg.setText(QString("В качестве параметров преобразования допускаются только числа.\n"
+                        "Для отделения целой части от дробной в вещественных числах использовать точку."));
+    msg.exec();
+}
+
+void MainWindow::on_task_btn_clicked()
+{
+    task_msg();
 }

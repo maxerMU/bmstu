@@ -30,9 +30,18 @@ private slots:
 
     void on_back_btn_clicked();
 
+    void on_center_btn_clicked();
+
+    void on_start_btn_clicked();
+
+    void on_task_btn_clicked();
+
 private:
     Ui::MainWindow *ui;
 
     void write_center();
+    void empty_history_msg();
+    void task_msg();
+    void type_error_msg();
 };
 #endif // MAINWINDOW_H
