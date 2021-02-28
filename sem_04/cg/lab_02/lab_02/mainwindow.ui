@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1283</width>
+    <height>770</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QLineEdit" name="dx_input">
+    <property name="geometry">
+     <rect>
+      <x>760</x>
+      <y>60</y>
+      <width>71</width>
+      <height>25</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="dy_input">
+    <property name="geometry">
+     <rect>
+      <x>850</x>
+      <y>60</y>
+      <width>71</width>
+      <height>25</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="move_btn">
+    <property name="geometry">
+     <rect>
+      <x>1120</x>
+      <y>60</y>
+      <width>131</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Перенести</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="xc_input">
+    <property name="geometry">
+     <rect>
+      <x>760</x>
+      <y>130</y>
+      <width>71</width>
+      <height>25</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="yc_input">
+    <property name="geometry">
+     <rect>
+      <x>850</x>
+      <y>130</y>
+      <width>71</width>
+      <height>25</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="kx_input">
+    <property name="geometry">
+     <rect>
+      <x>940</x>
+      <y>110</y>
+      <width>71</width>
+      <height>25</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="ky_input">
+    <property name="geometry">
+     <rect>
+      <x>1030</x>
+      <y>110</y>
+      <width>71</width>
+      <height>25</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="scale_btn">
+    <property name="geometry">
+     <rect>
+      <x>1120</x>
+      <y>110</y>
+      <width>131</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Масштабировать</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="angle_input">
+    <property name="geometry">
+     <rect>
+      <x>940</x>
+      <y>160</y>
+      <width>71</width>
+      <height>25</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="turn_btn">
+    <property name="geometry">
+     <rect>
+      <x>1120</x>
+      <y>160</y>
+      <width>131</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Повернуть</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="back_btn">
+    <property name="geometry">
+     <rect>
+      <x>1120</x>
+      <y>310</y>
+      <width>131</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Назад</string>
+    </property>
+   </widget>
+   <widget class="QGraphicsView" name="graphicsView">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>30</y>
+      <width>731</width>
+      <height>731</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QTableWidget" name="center_table">
+    <property name="geometry">
+     <rect>
+      <x>760</x>
+      <y>260</y>
+      <width>221</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="rowCount">
+     <number>1</number>
+    </property>
+    <property name="columnCount">
+     <number>2</number>
+    </property>
+    <row/>
+    <column/>
+    <column/>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>760</x>
+      <y>230</y>
+      <width>221</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>координаты центра фигуры</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="center_btn">
+    <property name="geometry">
+     <rect>
+      <x>1120</x>
+      <y>210</y>
+      <width>131</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Центрировать</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="start_btn">
+    <property name="geometry">
+     <rect>
+      <x>1120</x>
+      <y>260</y>
+      <width>131</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Начало</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="task_btn">
+    <property name="geometry">
+     <rect>
+      <x>1120</x>
+      <y>360</y>
+      <width>131</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Условие</string>
+    </property>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
