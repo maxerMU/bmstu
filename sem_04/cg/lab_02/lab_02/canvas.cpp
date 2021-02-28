@@ -1,4 +1,5 @@
 #include <iostream>
+#include <QPointF>
 #include <QPen>
 #include <QBrush>
 #include "canvas.h"
@@ -55,6 +56,28 @@ struct can_line : Figure
     point p2;
 };
 
+struct can_polygon : Figure
+{
+    can_polygon(const QPointF *points, int point_count, QColor fg, QColor bg, size_t width)
+        : Figure(fg, width), points(points), point_count(point_count), bg(bg)
+    {}
+
+    void paint(QPainter &painter)
+    {
+        QPen pen(color);
+        QBrush brush(bg);
+
+        painter.setPen(pen);
+        painter.setBrush(brush);
+
+        painter.drawPolygon(points, point_count);
+    }
+
+    const QPointF *points;
+    int point_count;
+    QColor bg;
+};
+
 canvas::canvas(QWidget *parent) : QWidget(parent)
 {
 }
@@ -96,6 +119,15 @@ void canvas::draw_line(long x1, long y1, long x2, long y2, QColor color, size_t 
     Figure *l = new can_line(x1, y1, x2, y2, color, width);
 
     shapes.push_back(l);
+
+    this->update();
+}
+
+void canvas::draw_polygon(const QPointF *points, int point_count, QColor fg, QColor bg, size_t width)
+{
+    Figure *p = new can_polygon(points, point_count, fg, bg, width);
+
+    shapes.push_back(p);
 
     this->update();
 }

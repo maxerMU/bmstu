@@ -32,6 +32,7 @@ public:
     void clear();
     void draw_point(long x, long y, QColor color, size_t width);
     void draw_line(long x1, long y1, long x2, long y2, QColor color, size_t width);
+    void draw_polygon(const QPointF *points, int point_count, QColor fg, QColor bg, size_t width);
 
 private:
     std::vector<Figure *> shapes;

@@ -30,7 +30,7 @@ MainWindow::MainWindow(QWidget *parent)
     field = new canvas(this);
     field->setGeometry(QRect(10, 30, 731, 731));
 
-    ep = new epycycloide(0, 2 * M_PI, M_PI / 96, 20, 60, *field);
+    ep = new epycycloide(0, 2 * M_PI, M_PI / 96, 30, 90, 20, 35, M_PI / 4, *field);
     write_center();
 }
 

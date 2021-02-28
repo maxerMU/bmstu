@@ -31,7 +31,8 @@ struct move_state
 
 struct epycycloide
 {
-    epycycloide(double angle_min, double angle_max, double angle_step, double a, double b, canvas &field);
+    epycycloide(double angle_min, double angle_max, double angle_step, double a, double b,
+                double rect_offset, double line_step, double line_angle, canvas &field);
     ~epycycloide();
     void find_center(double &xc, double &yc);
     void move_to_center(bool remember);
@@ -43,7 +44,10 @@ struct epycycloide
     int is_empty_history();
 
 private:
-    void get_points();
+    bool is_on_epycycloide(ep_point p);
+    void get_epycycloide_points();
+    void get_rect_points(); //epycycloide points must be already created
+    void get_line_points(); //epycycloide and rectangle points must be already created
     void draw();
 
     double angle_min;
@@ -51,8 +55,18 @@ private:
     double angle_step;
     double a;
     double b;
+
+    double rect_offset;
+
+    double line_step;
+    double line_angle;
+
     canvas &field;
-    std::vector<ep_point *> points;
+
+    std::vector<ep_point *> epycycloide_points;
+    std::vector<ep_point *> rect_points;
+    std::vector<ep_point *> lines_points;
+
     std::vector<move_state *> history;
 };
 
