@@ -10,9 +10,10 @@ typedef struct
     point_t p2;
 }edge_t;
 
-edge_t *create_edge();
-void delete_edge(edge_t *edge);
 int read_edge(FILE *src, edge_t &edge);
 void write_edge(FILE *dst, edge_t edge);
+void move_edge(double dx, double dy, double dz, edge_t &edge);
+void scale_edge(point_t c, double kx, double ky, double kz, edge_t &edge);
+void rotate_edge(point_t c, double xy_ang, double xz_ang, double yz_ang, edge_t &edge);
 
 #endif // EDGE_H

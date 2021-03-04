@@ -84,7 +84,9 @@ void MainWindow::on_write_btn_clicked()
 
 void MainWindow::draw()
 {
+    ui->graphicsView->items().clear();
     QImage image(761, 751, QImage::Format_RGB32);
+    image.fill(0);
     QPainter painter(&image);
     painter.setPen(QColor(255, 255, 255));
 
@@ -96,7 +98,49 @@ void MainWindow::draw()
         rc = figure_manager(GET_DISP_EDGE, i + 1, &edge);
     }
 
+
     QPixmap pixmap = QPixmap::fromImage(image);
     scene->addPixmap(pixmap);
+
     ui->graphicsView->setScene(scene);
+}
+
+void MainWindow::on_move_btn_clicked()
+{
+    double dx = ui->dx_input->text().toDouble();
+    double dy = ui->dy_input->text().toDouble();
+    double dz = ui->dz_input->text().toDouble();
+
+    figure_manager(MOVE, dx, dy, dz);
+
+    draw();
+}
+
+void MainWindow::on_scale_btn_clicked()
+{
+    double xc = ui->sxc_input->text().toDouble();
+    double yc = ui->syc_input->text().toDouble();
+    double zc = ui->szc_input->text().toDouble();
+    double kx = ui->kx_input->text().toDouble();
+    double ky = ui->ky_input->text().toDouble();
+    double kz = ui->kz_input->text().toDouble();
+
+    figure_manager(SCALE, xc, yc, zc, kx, ky, kz);
+
+    draw();
+}
+
+
+void MainWindow::on_rotate_btn_clicked()
+{
+    double xc = ui->rxc_input->text().toDouble();
+    double yc = ui->ryc_input->text().toDouble();
+    double zc = ui->rzc_input->text().toDouble();
+    double xy_ang = ui->xy_ang_input->text().toDouble();
+    double xz_ang = ui->xz_ang_input->text().toDouble();
+    double yz_ang = ui->yz_ang_input->text().toDouble();
+
+    figure_manager(ROTATE, xc, yc, zc, xy_ang, xz_ang, yz_ang);
+
+    draw();
 }

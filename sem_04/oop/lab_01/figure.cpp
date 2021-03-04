@@ -1,6 +1,7 @@
 #include <stdarg.h>
 #include <vector>
 #include <math.h>
+#include "point.h"
 #include "edge.h"
 #include "figure.h"
 
@@ -52,6 +53,25 @@ int get_display_edge(size_t index, display_edge_t &edge, figure_t figure)
     return rc;
 }
 
+void move_figure(double dx, double dy, double dz, figure_t &figure)
+{
+    for (size_t i = 0; i < figure.edges.size(); i++)
+        move_edge(dx, dy, dz, figure.edges[i]);
+}
+
+void scale_figure(point_t c, double kx, double ky, double kz, figure_t &figure)
+{
+    for (size_t i = 0; i < figure.edges.size(); i++)
+        scale_edge(c, kx, ky, kz, figure.edges[i]);
+}
+
+void rotate_figure(point_t c, double xy_ang, double xz_ang, double yz_ang, figure_t &figure)
+{
+    for (size_t i = 0; i < figure.edges.size(); i++)
+        rotate_edge(c, xy_ang, xz_ang, yz_ang, figure.edges[i]);
+}
+
+
 int figure_manager(action_t action, ...)
 {
     static figure_t figure;
@@ -76,6 +96,37 @@ int figure_manager(action_t action, ...)
         size_t index = va_arg(vl, size_t);
         display_edge_t *edge = va_arg(vl, display_edge_t *);
         rc = get_display_edge(index, *edge, figure);
+    }
+    else if (action == MOVE)
+    {
+        double dx = va_arg(vl, double);
+        double dy = va_arg(vl, double);
+        double dz = va_arg(vl, double);
+        move_figure(dx, dy, dz, figure);
+    }
+    else if (action == SCALE)
+    {
+        point_t c;
+        c.x = va_arg(vl, double);
+        c.y = va_arg(vl, double);
+        c.z = va_arg(vl, double);
+        double kx = va_arg(vl, double);
+        double ky = va_arg(vl, double);
+        double kz = va_arg(vl, double);
+
+        scale_figure(c, kx, ky, kz, figure);
+    }
+    else if (action == ROTATE)
+    {
+        point_t c;
+        c.x = va_arg(vl, double);
+        c.y = va_arg(vl, double);
+        c.z = va_arg(vl, double);
+        double xy_ang = va_arg(vl, double);
+        double xz_ang = va_arg(vl, double);
+        double yz_ang = va_arg(vl, double);
+
+        rotate_figure(c, xy_ang, xz_ang, yz_ang, figure);
     }
 
     return rc;

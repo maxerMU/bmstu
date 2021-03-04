@@ -22,6 +22,12 @@ private slots:
 
     void on_write_btn_clicked();
 
+    void on_move_btn_clicked();
+
+    void on_scale_btn_clicked();
+
+    void on_rotate_btn_clicked();
+
 private:
     Ui::MainWindow *ui;
     QGraphicsScene *scene;

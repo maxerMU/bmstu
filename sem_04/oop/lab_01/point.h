@@ -13,9 +13,10 @@ typedef struct
     double z;
 }point_t;
 
-point_t *create_point();
-void delete_point(point_t *point);
 int read_point(FILE *src, point_t &point);
 void write_point(FILE *dst, point_t point);
+void move_point(double dx, double dy, double dz, point_t &point);
+void scale_point(point_t c, double kx, double ky, double kz, point_t &point);
+void rotate_point(point_t c, double xy_ang, double xz_ang, double yz_ang, point_t &point);
 
 #endif // POINT_CPP
