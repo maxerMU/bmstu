@@ -90,7 +90,7 @@ void MainWindow::draw()
     QPainter painter(&image);
     painter.setPen(QColor(255, 255, 255));
 
-    display_edge_t edge;
+    draw_edge_t edge;
     int rc = figure_manager(GET_DISP_EDGE, 0, &edge);
     for (size_t i = 0; rc != WRONG_EDGE_INDEX; i++)
     {

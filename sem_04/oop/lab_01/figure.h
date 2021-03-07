@@ -10,10 +10,10 @@
 typedef struct
 {
     long x1;
-    long x2;
     long y1;
+    long x2;
     long y2;
-}display_edge_t;
+}draw_edge_t;
 
 typedef enum
 {

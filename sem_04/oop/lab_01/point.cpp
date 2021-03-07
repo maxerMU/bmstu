@@ -15,12 +15,12 @@ int read_point(FILE *src, point_t &point)
     return rc;
 }
 
-void write_point(FILE *dst, point_t point)
+void write_point(FILE *dst, const point_t &point)
 {
     fprintf(dst, "%lf %lf %lf", point.x, point.y, point.z);
 }
 
-void move_point(double dx, double dy, double dz, point_t &point)
+void move_point(const double dx, const double dy, const double dz, point_t &point)
 {
     point.x += dx;
     point.y += dy;
@@ -59,4 +59,10 @@ void rotate_point(point_t c, double xy_ang, double xz_ang, double yz_ang, point_
 
     point.y = c.y - (z - c.z) * sin(yz_ang) + (y - c.y) * cos(yz_ang);
     point.z = c.z + (z - c.z) * cos(yz_ang) + (y - c.y) * sin(yz_ang);
+}
+
+void to_display_point(display_point_t &disp_point, const point_t &point)
+{
+    disp_point.x = point.y - point.x / sqrt(2);
+    disp_point.y = point.x / sqrt(2) - point.z;
 }

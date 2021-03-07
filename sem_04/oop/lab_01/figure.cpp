@@ -37,17 +37,19 @@ void write_figure(FILE *dst, figure_t figure)
     }
 }
 
-int get_display_edge(size_t index, display_edge_t &edge, figure_t figure)
+int get_display_edge(size_t index, draw_edge_t &edge, figure_t figure)
 {
     int rc = FIGURE_SUCCESS;
     if (index >= figure.edges.size())
         rc = WRONG_EDGE_INDEX;
     else
     {
-        edge.x1 = figure.edges[index].p1.x - figure.edges[index].p1.y / sqrt(2);
-        edge.y1 = figure.edges[index].p1.y / sqrt(2) - figure.edges[index].p1.z;
-        edge.x2 = figure.edges[index].p2.x - figure.edges[index].p2.y / sqrt(2);
-        edge.y2 = figure.edges[index].p2.y / sqrt(2) - figure.edges[index].p2.z;
+        display_edge_t disp_edge;
+        to_display_edge(disp_edge, figure.edges[index]);
+        edge.x1 = disp_edge.p1.x;
+        edge.y1 = disp_edge.p1.y;
+        edge.x2 = disp_edge.p2.x;
+        edge.y2 = disp_edge.p2.y;
     }
 
     return rc;
@@ -94,7 +96,7 @@ int figure_manager(action_t action, ...)
     else if (action == GET_DISP_EDGE)
     {
         size_t index = va_arg(vl, size_t);
-        display_edge_t *edge = va_arg(vl, display_edge_t *);
+        draw_edge_t *edge = va_arg(vl, draw_edge_t *);
         rc = get_display_edge(index, *edge, figure);
     }
     else if (action == MOVE)
@@ -128,6 +130,8 @@ int figure_manager(action_t action, ...)
 
         rotate_figure(c, xy_ang, xz_ang, yz_ang, figure);
     }
+
+    va_end(vl);
 
     return rc;
 }

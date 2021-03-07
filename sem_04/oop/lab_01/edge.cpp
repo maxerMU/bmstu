@@ -35,3 +35,9 @@ void rotate_edge(point_t c, double xy_ang, double xz_ang, double yz_ang, edge_t 
     rotate_point(c, xy_ang, xz_ang, yz_ang, edge.p1);
     rotate_point(c, xy_ang, xz_ang, yz_ang, edge.p2);
 }
+
+void to_display_edge(display_edge_t &disp_edge, edge_t edge)
+{
+    to_display_point(disp_edge.p1, edge.p1);
+    to_display_point(disp_edge.p2, edge.p2);
+}
