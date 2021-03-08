@@ -4,7 +4,7 @@ StkSeg  ENDS
 DataS   SEGMENT WORD 'DATA'
 HelloMessage    DB   13
                 DB   10
-                DB   'Hello, world'
+                DW   'Hello, world !'
                 DB '$'
 DataS Ends
 Code    SEGMENT WORD 'CODE'
