@@ -21,7 +21,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->yc_input->setPlaceholderText(QString("yc"));
     ui->kx_input->setPlaceholderText(QString("kx"));
     ui->ky_input->setPlaceholderText(QString("ky"));
-    ui->angle_input->setPlaceholderText(QString("angle"));
+    ui->angle_input->setPlaceholderText(QString("Угол"));
     QStringList labels;
     labels.append(QString("x"));
     labels.append(QString("y"));
