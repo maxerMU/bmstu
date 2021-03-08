@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QGraphicsScene>
 #include "figure.h"
+#include "convert.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }

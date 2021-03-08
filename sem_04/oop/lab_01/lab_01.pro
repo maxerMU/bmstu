@@ -23,7 +23,9 @@ SOURCES += \
     point.cpp
 
 HEADERS += \
+    convert.h \
     edge.h \
+    errors.h \
     figure.h \
     mainwindow.h \
     point.h

@@ -1,6 +1,7 @@
-#include <fstream>
+#include "convert.h"
 #include "point.h"
 #include "edge.h"
+#include "errors.h"
 
 int read_edge(FILE *src, edge_t &edge)
 {
@@ -11,29 +12,29 @@ int read_edge(FILE *src, edge_t &edge)
     return rc;
 }
 
-void write_edge(FILE *dst, edge_t edge)
+void write_edge(FILE *dst, const edge_t &edge)
 {
     write_point(dst, edge.p1);
     fprintf(dst, " ");
     write_point(dst, edge.p2);
 }
 
-void move_edge(double dx, double dy, double dz, edge_t &edge)
+void move_edge(const move_t &move, edge_t &edge)
 {
-    move_point(dx, dy, dz, edge.p1);
-    move_point(dx, dy, dz, edge.p2);
+    move_point(move, edge.p1);
+    move_point(move, edge.p2);
 }
 
-void scale_edge(point_t c, double kx, double ky, double kz, edge_t &edge)
+void scale_edge(const scale_t &scale, edge_t &edge)
 {
-    scale_point(c, kx, ky, kz, edge.p1);
-    scale_point(c, kx, ky, kz, edge.p2);
+    scale_point(scale, edge.p1);
+    scale_point(scale, edge.p2);
 }
 
-void rotate_edge(point_t c, double xy_ang, double xz_ang, double yz_ang, edge_t &edge)
+void rotate_edge(const rotate_t &rotate, edge_t &edge)
 {
-    rotate_point(c, xy_ang, xz_ang, yz_ang, edge.p1);
-    rotate_point(c, xy_ang, xz_ang, yz_ang, edge.p2);
+    rotate_point(rotate, edge.p1);
+    rotate_point(rotate, edge.p2);
 }
 
 void to_display_edge(display_edge_t &disp_edge, edge_t edge)

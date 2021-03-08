@@ -1,9 +1,11 @@
+#include <stdio.h>
 #include <stdarg.h>
 #include <vector>
 #include <math.h>
 #include "point.h"
 #include "edge.h"
 #include "figure.h"
+#include "errors.h"
 
 typedef struct figure
 {
@@ -22,13 +24,13 @@ int read_figure(FILE *src, figure_t &figure)
 
     if (figure.edges.size() == 0)
         rc = EMPTY_FIGURE;
-    else
-        rc = FIGURE_SUCCESS;
+    else if (feof(src))
+        rc = SUCCESS;
 
     return rc;
 }
 
-void write_figure(FILE *dst, figure_t figure)
+void write_figure(FILE *dst, const figure_t &figure)
 {
     for (edge_t edge : figure.edges)
     {
@@ -37,40 +39,35 @@ void write_figure(FILE *dst, figure_t figure)
     }
 }
 
-int get_display_edge(size_t index, draw_edge_t &edge, figure_t figure)
+int get_display_edge(const size_t index, display_edge_t &edge, const figure_t &figure)
 {
-    int rc = FIGURE_SUCCESS;
+    int rc = SUCCESS;
     if (index >= figure.edges.size())
         rc = WRONG_EDGE_INDEX;
     else
     {
-        display_edge_t disp_edge;
-        to_display_edge(disp_edge, figure.edges[index]);
-        edge.x1 = disp_edge.p1.x;
-        edge.y1 = disp_edge.p1.y;
-        edge.x2 = disp_edge.p2.x;
-        edge.y2 = disp_edge.p2.y;
+        to_display_edge(edge, figure.edges[index]);
     }
 
     return rc;
 }
 
-void move_figure(double dx, double dy, double dz, figure_t &figure)
+void move_figure(const move_t &move, figure_t &figure)
 {
     for (size_t i = 0; i < figure.edges.size(); i++)
-        move_edge(dx, dy, dz, figure.edges[i]);
+        move_edge(move, figure.edges[i]);
 }
 
-void scale_figure(point_t c, double kx, double ky, double kz, figure_t &figure)
+void scale_figure(const scale_t &scale, figure_t &figure)
 {
     for (size_t i = 0; i < figure.edges.size(); i++)
-        scale_edge(c, kx, ky, kz, figure.edges[i]);
+        scale_edge(scale, figure.edges[i]);
 }
 
-void rotate_figure(point_t c, double xy_ang, double xz_ang, double yz_ang, figure_t &figure)
+void rotate_figure(const rotate_t &rotate, figure_t &figure)
 {
     for (size_t i = 0; i < figure.edges.size(); i++)
-        rotate_edge(c, xy_ang, xz_ang, yz_ang, figure.edges[i]);
+        rotate_edge(rotate, figure.edges[i]);
 }
 
 
@@ -78,7 +75,7 @@ int figure_manager(action_t action, ...)
 {
     static figure_t figure;
 
-    int rc = FIGURE_SUCCESS;
+    int rc = SUCCESS;
 
     va_list vl;
     va_start(vl, action);
@@ -96,39 +93,23 @@ int figure_manager(action_t action, ...)
     else if (action == GET_DISP_EDGE)
     {
         size_t index = va_arg(vl, size_t);
-        draw_edge_t *edge = va_arg(vl, draw_edge_t *);
+        display_edge_t *edge = va_arg(vl, display_edge_t *);
         rc = get_display_edge(index, *edge, figure);
     }
     else if (action == MOVE)
     {
-        double dx = va_arg(vl, double);
-        double dy = va_arg(vl, double);
-        double dz = va_arg(vl, double);
-        move_figure(dx, dy, dz, figure);
+        const move_t move = va_arg(vl, move_t);
+        move_figure(move, figure);
     }
     else if (action == SCALE)
     {
-        point_t c;
-        c.x = va_arg(vl, double);
-        c.y = va_arg(vl, double);
-        c.z = va_arg(vl, double);
-        double kx = va_arg(vl, double);
-        double ky = va_arg(vl, double);
-        double kz = va_arg(vl, double);
-
-        scale_figure(c, kx, ky, kz, figure);
+        const scale_t scale = va_arg(vl, scale_t);
+        scale_figure(scale, figure);
     }
     else if (action == ROTATE)
     {
-        point_t c;
-        c.x = va_arg(vl, double);
-        c.y = va_arg(vl, double);
-        c.z = va_arg(vl, double);
-        double xy_ang = va_arg(vl, double);
-        double xz_ang = va_arg(vl, double);
-        double yz_ang = va_arg(vl, double);
-
-        rotate_figure(c, xy_ang, xz_ang, yz_ang, figure);
+        const rotate_t rotate = va_arg(vl, rotate_t);
+        rotate_figure(rotate, figure);
     }
 
     va_end(vl);

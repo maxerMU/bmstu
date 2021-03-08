@@ -1,28 +1,19 @@
 #ifndef FIGURE_H
 #define FIGURE_H
 
-#include <stdio.h>
-
-#define FIGURE_SUCCESS 0
-#define EMPTY_FIGURE 1
-#define WRONG_EDGE_INDEX 2
-
-typedef struct
-{
-    long x1;
-    long y1;
-    long x2;
-    long y2;
-}draw_edge_t;
+// #include <stdio.h>
+// #include <stdarg.h>
+// #include <vector>
+// #include <math.h>
 
 typedef enum
 {
     READ, // FILE *src
     WRITE, // FILE *dst
-    GET_DISP_EDGE, // size_t edge_index, display_edge_t &display_edge
-    MOVE, // double dx, double dy, double dz
-    SCALE, // double xc, double yc, double zc, double kx, double ky, double kz
-    ROTATE, // double xc, double yc, double zc, double xy, double xz, double yz
+    GET_DISP_EDGE, // size_t edge_index, draw_edge_t &display_edge
+    MOVE, // move_t
+    SCALE, // scale_t
+    ROTATE, // rotate_t
 }action_t;
 
 int figure_manager(action_t action, ...);
