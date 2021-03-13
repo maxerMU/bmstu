@@ -1,21 +1,26 @@
 #ifndef FIGURE_H
 #define FIGURE_H
 
-// #include <stdio.h>
-// #include <stdarg.h>
-// #include <vector>
-// #include <math.h>
+#include "convert.h"
+#include "point.h"
+#include "edge.h"
+#include "points.h"
+#include "edges.h"
 
-typedef enum
+struct figure_t
 {
-    READ, // FILE *src
-    WRITE, // FILE *dst
-    GET_DISP_EDGE, // size_t edge_index, draw_edge_t &display_edge
-    MOVE, // move_t
-    SCALE, // scale_t
-    ROTATE, // rotate_t
-}action_t;
+    bool is_loaded;
+    point_t center;
+    edges_t edges;
+    points_t points;
+};
 
-int figure_manager(action_t action, ...);
+figure_t figure_init();
+int free_figure(figure_t &figure);
+int read_figure(figure_t &figure, const char *file_name);
+int write_figure(const figure_t &figure, const char *file_name);
+int move_figure(figure_t &figure, const move_t &move);
+int scale_figure(figure_t &figure, const scale_t &scale);
+int rotate_figure(figure_t &figure, const rotate_t &rotate);
 
 #endif // FIGURE_H

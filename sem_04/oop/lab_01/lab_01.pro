@@ -16,19 +16,31 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    display_figure.cpp \
+    display_point.cpp \
+    display_points.cpp \
     edge.cpp \
+    edges.cpp \
     figure.cpp \
     main.cpp \
     mainwindow.cpp \
-    point.cpp
+    manager.cpp \
+    point.cpp \
+    points.cpp
 
 HEADERS += \
     convert.h \
+    display_figure.h \
+    display_point.h \
+    display_points.h \
     edge.h \
+    edges.h \
     errors.h \
     figure.h \
     mainwindow.h \
-    point.h
+    manager.h \
+    point.h \
+    points.h
 
 FORMS += \
     mainwindow.ui

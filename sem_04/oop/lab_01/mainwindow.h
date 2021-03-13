@@ -3,7 +3,7 @@
 
 #include <QMainWindow>
 #include <QGraphicsScene>
-#include "figure.h"
+#include "manager.h"
 #include "convert.h"
 
 QT_BEGIN_NAMESPACE
@@ -32,6 +32,8 @@ private slots:
 private:
     Ui::MainWindow *ui;
     QGraphicsScene *scene;
+
+    display_figure_t display_figure;
 
     void draw();
 

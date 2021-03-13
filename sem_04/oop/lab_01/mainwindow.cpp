@@ -1,3 +1,4 @@
+#include <string.h>
 #include <QString>
 #include <QPainter>
 #include <QImage>
@@ -5,14 +6,15 @@
 #include <QGraphicsScene>
 #include <QMessageBox>
 #include <stdio.h>
-#include "figure.h"
+#include "manager.h"
 #include "errors.h"
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
+    , ui(new Ui::MainWindow),
+      display_figure(init_display_figure())
 {
     ui->setupUi(this);
 
@@ -42,24 +44,23 @@ MainWindow::~MainWindow()
     delete ui;
 
     delete scene;
+
+    parameters_t params;
+    figure_manager(display_figure, FREE, params);
 }
 
 
 void MainWindow::on_read_btn_clicked()
 {
-    FILE *f = fopen(ui->infile_input->text().toStdString().c_str(), "r");
-    if (!f)
+    parameters_t params;
+    params.file_name = strdup(ui->infile_input->text().toStdString().c_str());
+    int rc = figure_manager(display_figure, READ, params);
+    if (rc == OPEN_ER)
         no_file_msg();
-    else
-    {
-        int rc = figure_manager(READ, f);
-        if (rc == EMPTY_FIGURE)
-            wrong_format_msg();
-        else
-            draw();
-
-        fclose(f);
-    }
+    else if (rc == FIGURE_READ_ER)
+        wrong_format_msg();
+    else if (!rc)
+        draw();
 }
 
 void MainWindow::no_file_msg()
@@ -78,9 +79,9 @@ void MainWindow::wrong_format_msg()
 
 void MainWindow::on_write_btn_clicked()
 {
-    FILE *f = fopen(ui->outfile_input->text().toStdString().c_str(), "w");
-    figure_manager(WRITE, f);
-    fclose(f);
+    parameters_t params;
+    params.file_name = strdup(ui->outfile_input->text().toStdString().c_str());
+    figure_manager(display_figure, WRITE, params);
 }
 
 void MainWindow::draw()
@@ -91,12 +92,15 @@ void MainWindow::draw()
     QPainter painter(&image);
     painter.setPen(QColor(255, 255, 255));
 
-    display_edge_t edge;
-    int rc = figure_manager(GET_DISP_EDGE, 0, &edge);
-    for (size_t i = 1; rc != WRONG_EDGE_INDEX; i++)
+    parameters_t params;
+    figure_manager(display_figure, GET_DISP_FIGURE, params);
+    for (size_t i = 0; i < display_figure.edges.size; i++)
     {
-        painter.drawLine(edge.p1.x, edge.p1.y, edge.p2.x, edge.p2.y);
-        rc = figure_manager(GET_DISP_EDGE, i, &edge);
+        painter.drawLine(display_figure.points.disp_points[display_figure.edges.edges[i].p1].x,
+                         display_figure.points.disp_points[display_figure.edges.edges[i].p1].y,
+                         display_figure.points.disp_points[display_figure.edges.edges[i].p2].x,
+                         display_figure.points.disp_points[display_figure.edges.edges[i].p2].y);
+
     }
 
 
@@ -104,6 +108,8 @@ void MainWindow::draw()
     scene->addPixmap(pixmap);
 
     ui->graphicsView->setScene(scene);
+
+    free_display_figure(display_figure);
 }
 
 void MainWindow::on_move_btn_clicked()
@@ -113,7 +119,10 @@ void MainWindow::on_move_btn_clicked()
     move.dy = ui->dy_input->text().toDouble();
     move.dz = ui->dz_input->text().toDouble();
 
-    figure_manager(MOVE, move);
+    parameters_t params;
+    params.move_params = move;
+
+    figure_manager(display_figure, MOVE, params);
 
     draw();
 }
@@ -121,14 +130,14 @@ void MainWindow::on_move_btn_clicked()
 void MainWindow::on_scale_btn_clicked()
 {
     scale_t scale;
-    scale.xc = ui->sxc_input->text().toDouble();
-    scale.yc = ui->syc_input->text().toDouble();
-    scale.zc = ui->szc_input->text().toDouble();
     scale.kx = ui->kx_input->text().toDouble();
     scale.ky = ui->ky_input->text().toDouble();
     scale.kz = ui->kz_input->text().toDouble();
 
-    figure_manager(SCALE, scale);
+    parameters_t params;
+    params.scale_params = scale;
+
+    figure_manager(display_figure, SCALE, params);
 
     draw();
 }
@@ -137,14 +146,14 @@ void MainWindow::on_scale_btn_clicked()
 void MainWindow::on_rotate_btn_clicked()
 {
     rotate_t rotate;
-    rotate.xc = ui->rxc_input->text().toDouble();
-    rotate.yc = ui->ryc_input->text().toDouble();
-    rotate.zc = ui->rzc_input->text().toDouble();
     rotate.xy_angle = ui->xy_ang_input->text().toDouble();
     rotate.xz_angle = ui->xz_ang_input->text().toDouble();
     rotate.yz_angle = ui->yz_ang_input->text().toDouble();
 
-    figure_manager(ROTATE, rotate);
+    parameters_t params;
+    params.rotate_params = rotate;
+
+    figure_manager(display_figure, ROTATE, params);
 
     draw();
 }

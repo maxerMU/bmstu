@@ -6,18 +6,17 @@
 #include <stdio.h>
 #include "convert.h"
 
-typedef struct
+struct point_t
 {
     double x;
     double y;
     double z;
-}point_t;
+};
 
-int read_point(FILE *src, point_t &point);
-void write_point(FILE *dst, const point_t &point);
-void move_point(const move_t &move, point_t &point);
-void scale_point(const scale_t &scale, point_t &point);
-void rotate_point(const rotate_t &rotate, point_t &point);
-void to_display_point(display_point_t &disp_point, const point_t &point);
+int read_point(point_t &point, FILE *src);
+int write_point(FILE *dst, const point_t &point);
+int move_point(point_t &point, const move_t &move);
+int scale_point(point_t &point, const scale_t &scale, const point_t &c);
+int rotate_point(point_t &point, const rotate_t &rotate, const point_t &c);
 
 #endif // POINT_CPP

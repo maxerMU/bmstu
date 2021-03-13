@@ -3,42 +3,53 @@
 #include "edge.h"
 #include "errors.h"
 
-int read_edge(FILE *src, edge_t &edge)
+int read_edge(edge_t &edge, FILE *const src)
 {
-    int rc = read_point(src, edge.p1);
+    size_t temp1, temp2;
+    if (fscanf(src, "%zu %zu", &temp1, &temp2) != 2)
+        return EDGE_READ_ER;
+
+    edge.p1 = temp1 - 1;
+    edge.p2 = temp2 - 1;
+
+    return SUCCESS;
+}
+
+void write_edge(FILE * const dst, const edge_t &edge)
+{
+    fprintf(dst, "%zu %zu", edge.p1, edge.p2);
+}
+
+bool is_correct_edge(const edge_t &edge, size_t max_num)
+{
+    return (edge.p1 < max_num) && (edge.p2 < max_num);
+}
+
+/*
+int move_edge(edge_t &edge, const move_t &move)
+{
+    int rc = move_point(edge.p1, move);
     if (!rc)
-        rc = read_point(src, edge.p2);
+        rc = move_point(edge.p2, move);
 
     return rc;
 }
 
-void write_edge(FILE *dst, const edge_t &edge)
+int scale_edge(edge_t &edge, const scale_t &scale, const point_t &c)
 {
-    write_point(dst, edge.p1);
-    fprintf(dst, " ");
-    write_point(dst, edge.p2);
+    int rc = scale_point(edge.p1, scale, c);
+    if (!rc)
+        rc = scale_point(edge.p2, scale, c);
+
+    return rc;
 }
 
-void move_edge(const move_t &move, edge_t &edge)
+int rotate_edge(edge_t &edge, const rotate_t &rotate, const point_t &c)
 {
-    move_point(move, edge.p1);
-    move_point(move, edge.p2);
-}
+    int rc = rotate_point(edge.p1, rotate, c);
+    if (!rc)
+        rc = rotate_point(edge.p2, rotate, c);
 
-void scale_edge(const scale_t &scale, edge_t &edge)
-{
-    scale_point(scale, edge.p1);
-    scale_point(scale, edge.p2);
+    return rc;
 }
-
-void rotate_edge(const rotate_t &rotate, edge_t &edge)
-{
-    rotate_point(rotate, edge.p1);
-    rotate_point(rotate, edge.p2);
-}
-
-void to_display_edge(display_edge_t &disp_edge, edge_t edge)
-{
-    to_display_point(disp_edge.p1, edge.p1);
-    to_display_point(disp_edge.p2, edge.p2);
-}
+*/
