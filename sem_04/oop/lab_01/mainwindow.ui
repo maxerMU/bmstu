@@ -103,41 +103,11 @@
      <string>scale</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="sxc_input">
-    <property name="geometry">
-     <rect>
-      <x>800</x>
-      <y>230</y>
-      <width>81</width>
-      <height>25</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="syc_input">
-    <property name="geometry">
-     <rect>
-      <x>910</x>
-      <y>230</y>
-      <width>81</width>
-      <height>25</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="szc_input">
-    <property name="geometry">
-     <rect>
-      <x>1020</x>
-      <y>230</y>
-      <width>81</width>
-      <height>25</height>
-     </rect>
-    </property>
-   </widget>
    <widget class="QLineEdit" name="xy_ang_input">
     <property name="geometry">
      <rect>
       <x>800</x>
-      <y>390</y>
+      <y>310</y>
       <width>81</width>
       <height>25</height>
      </rect>
@@ -147,7 +117,7 @@
     <property name="geometry">
      <rect>
       <x>910</x>
-      <y>390</y>
+      <y>310</y>
       <width>81</width>
       <height>25</height>
      </rect>
@@ -157,7 +127,7 @@
     <property name="geometry">
      <rect>
       <x>1020</x>
-      <y>390</y>
+      <y>310</y>
       <width>81</width>
       <height>25</height>
      </rect>
@@ -167,7 +137,7 @@
     <property name="geometry">
      <rect>
       <x>1130</x>
-      <y>250</y>
+      <y>230</y>
       <width>89</width>
       <height>25</height>
      </rect>
@@ -176,31 +146,11 @@
      <string>scale</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="rxc_input">
-    <property name="geometry">
-     <rect>
-      <x>800</x>
-      <y>350</y>
-      <width>81</width>
-      <height>25</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="ryc_input">
-    <property name="geometry">
-     <rect>
-      <x>910</x>
-      <y>350</y>
-      <width>81</width>
-      <height>25</height>
-     </rect>
-    </property>
-   </widget>
    <widget class="QLineEdit" name="kz_input">
     <property name="geometry">
      <rect>
       <x>1020</x>
-      <y>270</y>
+      <y>230</y>
       <width>81</width>
       <height>25</height>
      </rect>
@@ -210,7 +160,7 @@
     <property name="geometry">
      <rect>
       <x>1130</x>
-      <y>370</y>
+      <y>310</y>
       <width>89</width>
       <height>25</height>
      </rect>
@@ -219,21 +169,11 @@
      <string>rotate</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="rzc_input">
-    <property name="geometry">
-     <rect>
-      <x>1020</x>
-      <y>350</y>
-      <width>81</width>
-      <height>25</height>
-     </rect>
-    </property>
-   </widget>
    <widget class="QLineEdit" name="ky_input">
     <property name="geometry">
      <rect>
       <x>910</x>
-      <y>270</y>
+      <y>230</y>
       <width>81</width>
       <height>25</height>
      </rect>
@@ -243,7 +183,7 @@
     <property name="geometry">
      <rect>
       <x>800</x>
-      <y>270</y>
+      <y>230</y>
       <width>81</width>
       <height>25</height>
      </rect>
@@ -253,7 +193,7 @@
     <property name="geometry">
      <rect>
       <x>800</x>
-      <y>310</y>
+      <y>270</y>
       <width>67</width>
       <height>17</height>
      </rect>

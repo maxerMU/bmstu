@@ -12,7 +12,7 @@ edges_t init_edges()
 
 bool are_coorect_edges(const edges_t &edges, size_t max_num)
 {
-    bool correct = true;
+    bool correct = (edges.edges) && (edges.size);
     for (size_t i = 0; i < edges.size && correct; i++)
         correct = is_correct_edge(edges.edges[i], max_num);
 

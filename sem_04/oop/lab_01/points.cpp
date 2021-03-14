@@ -11,6 +11,11 @@ points_t init_points()
     return points;
 }
 
+bool are_correct_points(const points_t &points)
+{
+    return (points.points) && (points.size);
+}
+
 int points_mem_manager(points_t &points, size_t new_size)
 {
     point_t *temp = (point_t *) realloc(points.points, new_size * sizeof(point_t));
@@ -87,26 +92,41 @@ void write_points(FILE *const dst, const points_t &points)
 
 int move_points(points_t &points, const move_t &move)
 {
-    for (size_t i = 0; i < points.size; i++)
-        move_point(points.points[i], move);
+    if (!are_correct_points(points))
+        return INCORRECT_POINTS;
 
-    return SUCCESS;
+    int rc = SUCCESS;
+
+    for (size_t i = 0; i < points.size && !rc; i++)
+        rc = move_point(points.points[i], move);
+
+    return rc;
 }
 
 
 int scale_points(points_t &points, const scale_t &scale, const point_t &c)
 {
-    for (size_t i = 0; i < points.size; i++)
-        scale_point(points.points[i], scale, c);
+    if (!are_correct_points(points))
+        return INCORRECT_POINTS;
 
-    return SUCCESS;
+    int rc = SUCCESS;
+
+    for (size_t i = 0; i < points.size && !rc; i++)
+        rc = scale_point(points.points[i], scale, c);
+
+    return rc;
 }
 
 
 int rotate_points(points_t &points, const rotate_t &rotate, const point_t &c)
 {
-    for (size_t i = 0; i < points.size; i++)
-        rotate_point(points.points[i], rotate, c);
+    if (!are_correct_points(points))
+        return INCORRECT_POINTS;
+
+    int rc = SUCCESS;
+
+    for (size_t i = 0; i < points.size && !rc; i++)
+        rc = rotate_point(points.points[i], rotate, c);
 
     return SUCCESS;
 }

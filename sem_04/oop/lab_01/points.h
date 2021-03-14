@@ -10,6 +10,7 @@ struct points_t
 };
 
 points_t init_points();
+bool are_correct_points(const points_t &points);
 int points_mem_manager(points_t &points, size_t new_size);
 int read_points(points_t &points, FILE *const src);
 void write_points(FILE *const dst, const points_t &points);

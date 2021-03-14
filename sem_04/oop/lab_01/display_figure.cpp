@@ -33,9 +33,9 @@ int to_display_figure(display_figure_t &display_figure, const figure_t &figure)
         return rc;
     }
 
-    to_display_points(temp.points, figure.points);
-
-    display_figure = temp;
+    rc = to_display_points(temp.points, figure.points);
+    if (!rc)
+        display_figure = temp;
 
     return rc;
 }

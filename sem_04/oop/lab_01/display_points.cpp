@@ -10,6 +10,11 @@ display_points_t disp_points_init()
     return disp_points;
 }
 
+bool are_correct_disp_points(const display_points_t &points)
+{
+    return (points.disp_points) && (points.size);
+}
+
 int display_points_mem_manager(display_points_t &disp_points, size_t size)
 {
     display_point_t *temp = (display_point_t *) realloc(disp_points.disp_points, size * sizeof(display_point_t));
@@ -23,8 +28,15 @@ int display_points_mem_manager(display_points_t &disp_points, size_t size)
     return SUCCESS;
 }
 
-void to_display_points(display_points_t &disp_points, const points_t &points)
+int to_display_points(display_points_t &disp_points, const points_t &points)
 {
-    for (size_t i = 0; i < disp_points.size; i++)
-        to_display_point(disp_points.disp_points[i], points.points[i]);
+    if (!are_correct_disp_points(disp_points))
+        return INCORRECT_DISP_POINTS;
+
+    int rc = SUCCESS;
+
+    for (size_t i = 0; i < disp_points.size && !rc; i++)
+        rc = to_display_point(disp_points.disp_points[i], points.points[i]);
+
+    return rc;
 }

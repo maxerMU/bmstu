@@ -21,15 +21,9 @@ MainWindow::MainWindow(QWidget *parent)
     ui->dx_input->setPlaceholderText(QString("dx"));
     ui->dy_input->setPlaceholderText(QString("dy"));
     ui->dz_input->setPlaceholderText(QString("dz"));
-    ui->sxc_input->setPlaceholderText(QString("xc"));
-    ui->syc_input->setPlaceholderText(QString("yc"));
-    ui->szc_input->setPlaceholderText(QString("zc"));
     ui->kx_input->setPlaceholderText(QString("kx"));
     ui->ky_input->setPlaceholderText(QString("ky"));
     ui->kz_input->setPlaceholderText(QString("kz"));
-    ui->rxc_input->setPlaceholderText(QString("xc"));
-    ui->ryc_input->setPlaceholderText(QString("yc"));
-    ui->rzc_input->setPlaceholderText(QString("zc"));
     ui->xy_ang_input->setPlaceholderText(QString("xy angle"));
     ui->xz_ang_input->setPlaceholderText(QString("xz angle"));
     ui->yz_ang_input->setPlaceholderText(QString("yz angle"));
