@@ -42,58 +42,65 @@ int scale_point(point_t &point, const scale_t &scale, const point_t &c)
     return SUCCESS;
 }
 
-int rotate_xy(point_t &point, const double angle, const point_t &c)
+int rotate_xy(point_t &point, const double angle)
 {
     double xy_angle = (angle * M_PI) / 180;
 
     double x = point.x;
     double y = point.y;
 
-    point.x = c.x + (x - c.x) * cos(xy_angle) - (y - c.y) * sin(xy_angle);
-    point.y = c.y + (x - c.x) * sin(xy_angle) + (y - c.y) * cos(xy_angle);
+    point.x = x * cos(xy_angle) - y * sin(xy_angle);
+    point.y = x * sin(xy_angle) + y * cos(xy_angle);
 
     return SUCCESS;
 }
 
-int rotate_xz(point_t &point, const double angle, const point_t &c)
+int rotate_xz(point_t &point, const double angle)
 {
     double xz_angle = (angle * M_PI) / 180;
 
     double x = point.x;
     double z = point.z;
 
-    point.x = c.x + (x - c.x) * cos(xz_angle) + (z - c.z) * sin(xz_angle);
-    point.z = c.z - (x - c.x) * sin(xz_angle) + (z - c.z) * cos(xz_angle);
+    point.x = x * cos(xz_angle) + z * sin(xz_angle);
+    point.z = x * sin(xz_angle) + z * cos(xz_angle);
 
     return SUCCESS;
 }
 
-int rotate_yz(point_t &point, const double angle, const point_t &c)
+int rotate_yz(point_t &point, const double angle)
 {
     double yz_angle = (angle * M_PI) / 180;
 
     double y = point.y;
     double z = point.z;
 
-    point.y = c.y - (z - c.z) * sin(yz_angle) + (y - c.y) * cos(yz_angle);
-    point.z = c.z + (z - c.z) * cos(yz_angle) + (y - c.y) * sin(yz_angle);
+    point.y = z * sin(yz_angle) + y * cos(yz_angle);
+    point.z = z * cos(yz_angle) + y * sin(yz_angle);
 
     return SUCCESS;
 }
 
 int rotate_point(point_t &point, const rotate_t &rotate, const point_t &c)
 {
-    int rc = rotate_xy(point, rotate.xy_angle, c);
+    point.x -= c.x;
+    point.y -= c.y;
+    point.z -= c.z;
+    int rc = rotate_xy(point, rotate.xy_angle);
     if (rc)
         return rc;
 
-    rc = rotate_xz(point, rotate.xz_angle, c);
+    rc = rotate_xz(point, rotate.xz_angle);
     if (rc)
         return rc;
 
-    rc = rotate_yz(point, rotate.yz_angle, c);
+    rc = rotate_yz(point, rotate.yz_angle);
     if (rc)
         return rc;
+
+    point.x += c.x;
+    point.y += c.y;
+    point.z += c.z;
 
     return SUCCESS;
 }

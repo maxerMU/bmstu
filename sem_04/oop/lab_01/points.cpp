@@ -78,10 +78,9 @@ int read_points(points_t &points, FILE *const src)
     if (rc)
     {
         points_mem_manager(points, 0);
-        return rc;
     }
 
-    return SUCCESS;
+    return rc;
 }
 
 void write_points(FILE *const dst, const points_t &points)

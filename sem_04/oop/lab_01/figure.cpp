@@ -39,8 +39,8 @@ int free_figure(figure_t &figure)
 
 int write_figure(const figure_t &figure, const char *file_name)
 {
-    if (!figure.is_loaded)
-        return UNINIT_FIGURE;
+    if (!is_correct_figure(figure))
+        return INCORRECT_FIGURE;
 
     FILE *dst = fopen(file_name, "w");
     if (!dst)
@@ -72,6 +72,8 @@ int read_figure(figure_t &figure, const char *file_name)
             rc = read_edges(tmp.edges, f);
     }
 
+    fclose(f);
+
     if (!rc)
     {
         tmp.is_loaded = true;
@@ -83,18 +85,18 @@ int read_figure(figure_t &figure, const char *file_name)
         else
             rc = INCORRECT_FIGURE;
     }
-    else
+
+    if (rc)
         free_figure(tmp);
 
-    fclose(f);
 
     return rc;
 }
 
 int move_figure(figure_t &figure, const move_t &move)
 {
-    if (!figure.is_loaded)
-        return UNINIT_FIGURE;
+    if (!is_correct_figure(figure))
+        return INCORRECT_FIGURE;
 
     int rc = move_point(figure.center, move);
     if (rc)
@@ -107,8 +109,8 @@ int move_figure(figure_t &figure, const move_t &move)
 
 int scale_figure(figure_t &figure, const scale_t &scale)
 {
-    if (!figure.is_loaded)
-        return UNINIT_FIGURE;
+    if (!is_correct_figure(figure))
+        return INCORRECT_FIGURE;
 
     int rc = scale_points(figure.points, scale, figure.center);
 
@@ -117,8 +119,8 @@ int scale_figure(figure_t &figure, const scale_t &scale)
 
 int rotate_figure(figure_t &figure, const rotate_t &rotate)
 {
-    if (!figure.is_loaded)
-        return UNINIT_FIGURE;
+    if (!is_correct_figure(figure))
+        return INCORRECT_FIGURE;
 
     int rc = rotate_points(figure.points, rotate, figure.center);
 

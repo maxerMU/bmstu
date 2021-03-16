@@ -23,6 +23,6 @@ union parameters_t
     rotate_t rotate_params;
 };
 
-int figure_manager(display_figure_t &display_figure, action_t action, const parameters_t &params);
+int figure_manager(display_figure_t &display_figure, const action_t &action, const parameters_t &params);
 
 #endif // MANAGER_H
