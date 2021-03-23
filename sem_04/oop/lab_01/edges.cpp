@@ -53,7 +53,7 @@ void print_edges(FILE *const dst, const edges_t &edges)
     }
 }
 
-int edges_mem_manager(edges_t &edges, const size_t size)
+int realloc_edges(edges_t &edges, const size_t size)
 {
     edge_t *temp = (edge_t *) realloc(edges.edges, size * sizeof(edge_t));
 
@@ -66,6 +66,13 @@ int edges_mem_manager(edges_t &edges, const size_t size)
     return SUCCESS;
 }
 
+void free_edges(edges_t &edges)
+{
+    free(edges.edges);
+
+    edges = init_edges();
+}
+
 int read_edges(edges_t &edges, FILE *const src)
 {
     size_t size;
@@ -73,13 +80,13 @@ int read_edges(edges_t &edges, FILE *const src)
     if (rc)
         return rc;
 
-    rc = edges_mem_manager(edges, size);
+    rc = realloc_edges(edges, size);
     if (rc)
         return rc;
 
     rc = scan_edges(edges, src);
     if (rc)
-        edges_mem_manager(edges, 0);
+        realloc_edges(edges, 0);
 
     return rc;
 }
@@ -92,7 +99,7 @@ void write_edges(FILE *const dst, const edges_t &edges)
 
 int edges_dup(edges_t &dst, const edges_t &src)
 {
-    int rc = edges_mem_manager(dst, src.size);
+    int rc = realloc_edges(dst, src.size);
     if (rc)
         return rc;
 

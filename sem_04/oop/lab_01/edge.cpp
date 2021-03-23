@@ -17,7 +17,7 @@ int read_edge(edge_t &edge, FILE *const src)
 
 void write_edge(FILE * const dst, const edge_t &edge)
 {
-    fprintf(dst, "%zu %zu", edge.p1, edge.p2);
+    fprintf(dst, "%zu %zu", edge.p1 + 1, edge.p2 + 1);
 }
 
 bool is_correct_edge(const edge_t &edge, size_t max_num)

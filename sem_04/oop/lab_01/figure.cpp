@@ -10,16 +10,13 @@ figure_t figure_init()
     figure_t figure;
     figure.edges = init_edges();
     figure.points = init_points();
-    figure.is_loaded = false;
 
     return figure;
 }
 
 bool is_correct_figure(const figure_t &figure)
 {
-    bool correct = figure.is_loaded;
-    if (correct)
-        correct = are_coorect_edges(figure.edges, figure.points.size);
+    bool correct = are_coorect_edges(figure.edges, figure.points.size);
 
     if (correct)
         correct = are_correct_points(figure.points);
@@ -29,8 +26,8 @@ bool is_correct_figure(const figure_t &figure)
 
 int free_figure(figure_t &figure)
 {
-    points_mem_manager(figure.points, 0);
-    edges_mem_manager(figure.edges, 0);
+    free_points(figure.points);
+    free_edges(figure.edges);
 
     figure = figure_init();
 
@@ -69,26 +66,29 @@ int read_figure(figure_t &figure, const char *file_name)
     {
         rc = read_points(tmp.points, f);
         if (!rc)
+        {
             rc = read_edges(tmp.edges, f);
+            if (rc)
+                free_points(tmp.points);
+        }
     }
 
     fclose(f);
 
     if (!rc)
     {
-        tmp.is_loaded = true;
-        if (is_correct_figure(tmp))
+        if (!is_correct_figure(tmp))
         {
-            free_figure(figure);
-            figure = tmp;
+            rc = INCORRECT_FIGURE;
+            free_figure(tmp);
         }
         else
-            rc = INCORRECT_FIGURE;
+        {
+            free_figure(figure);
+            tmp.is_loaded = true;
+            figure = tmp;
+        }
     }
-
-    if (rc)
-        free_figure(tmp);
-
 
     return rc;
 }

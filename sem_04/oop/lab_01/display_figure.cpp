@@ -12,8 +12,8 @@ display_figure_t init_display_figure()
 
 int free_display_figure(display_figure_t &figure)
 {
-    display_points_mem_manager(figure.points, 0);
-    edges_mem_manager(figure.edges, 0);
+    free_display_points(figure.points);
+    free_edges(figure.edges);
 
     return SUCCESS;
 }
@@ -26,7 +26,7 @@ int to_display_figure(display_figure_t &display_figure, const figure_t &figure)
     if (rc)
         return rc;
 
-    rc = display_points_mem_manager(temp.points, figure.points.size);
+    rc = realloc_display_points(temp.points, figure.points.size);
     if (rc)
     {
         free_display_figure(temp);

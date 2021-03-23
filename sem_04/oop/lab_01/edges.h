@@ -14,6 +14,7 @@ int edges_dup(edges_t &dst, const edges_t &src);
 int read_edges(edges_t &edges, FILE *const src);
 void write_edges(FILE *const dst, const edges_t &edges);
 bool are_coorect_edges(const edges_t &edges, size_t max_num);
-int edges_mem_manager(edges_t &edges, const size_t size);
+int realloc_edges(edges_t &edges, const size_t size);
+void free_edges(edges_t &edges);
 
 #endif // EDGES_H

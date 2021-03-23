@@ -51,9 +51,9 @@ void MainWindow::on_read_btn_clicked()
     int rc = figure_manager(display_figure, READ, params);
     if (rc == OPEN_ER)
         no_file_msg();
-    else if (rc == FIGURE_READ_ER)
+    else if (rc)
         wrong_format_msg();
-    else if (!rc)
+    else
         draw();
 }
 

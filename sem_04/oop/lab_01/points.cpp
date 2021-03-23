@@ -16,7 +16,7 @@ bool are_correct_points(const points_t &points)
     return (points.points) && (points.size);
 }
 
-int points_mem_manager(points_t &points, size_t new_size)
+int realloc_points(points_t &points, size_t new_size)
 {
     point_t *temp = (point_t *) realloc(points.points, new_size * sizeof(point_t));
 
@@ -27,6 +27,13 @@ int points_mem_manager(points_t &points, size_t new_size)
     points.size = new_size;
 
     return SUCCESS;
+}
+
+void free_points(points_t &points)
+{
+    free(points.points);
+
+    points = init_points();
 }
 
 int scan_points_size(size_t *size, FILE *const src)
@@ -70,14 +77,14 @@ int read_points(points_t &points, FILE *const src)
     if (rc)
         return rc;
 
-    rc = points_mem_manager(points, size);
+    rc = realloc_points(points, size);
     if (rc)
         return rc;
 
     rc = scan_points(points, src);
     if (rc)
     {
-        points_mem_manager(points, 0);
+        realloc_points(points, 0);
     }
 
     return rc;
