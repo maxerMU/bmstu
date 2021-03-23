@@ -16,15 +16,21 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    canvas.cpp \
     main.cpp \
     mainwindow.cpp \
     color_view.cpp \
-    methods.cpp
+    methods.cpp \
+    methods_time.cpp \
+    plot_funcs.cpp
 
 HEADERS += \
+    canvas.h \
     mainwindow.h \
     color_view.h \
-    methods.h
+    methods.h \
+    methods_time.h \
+    plot_funcs.h
 
 FORMS += \
     mainwindow.ui
