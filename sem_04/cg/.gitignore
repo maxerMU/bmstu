@@ -1,4 +1,5 @@
 *build*/
+.idea/
 *.user
 *.autosave
 *.txt

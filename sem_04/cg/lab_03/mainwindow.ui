@@ -315,15 +315,42 @@
    <widget class="QPushButton" name="time_btn">
     <property name="geometry">
      <rect>
-      <x>680</x>
+      <x>660</x>
       <y>460</y>
-      <width>91</width>
+      <width>121</width>
       <height>41</height>
      </rect>
     </property>
     <property name="text">
      <string>Замер
 времени</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="stair_btn">
+    <property name="geometry">
+     <rect>
+      <x>510</x>
+      <y>460</y>
+      <width>121</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Замер
+ступенчатости</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="clr_btn">
+    <property name="geometry">
+     <rect>
+      <x>660</x>
+      <y>510</y>
+      <width>121</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Очистить</string>
     </property>
    </widget>
   </widget>

@@ -4,6 +4,7 @@
 #include <QColor>
 #include <QString>
 #include "methods_time.h"
+#include "methods_stair.h"
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
@@ -157,5 +158,28 @@ void MainWindow::draw_spectr(const QColor &fg, const QColor &bg, draw_func_t dra
 void MainWindow::on_time_btn_clicked()
 {
     const char *file_name = "time_res.txt";
-    time_table(file_name, 15, 50000);
+    time_table(file_name, 15, 5000);
+    system("python3 time.py");
+}
+
+void MainWindow::on_stair_btn_clicked()
+{
+    const char *file_name = "stairs_res.txt";
+
+    if (ui->method_select->currentIndex() == CDA)
+        stairs_table(file_name, 5, 50, cda_stairs);
+    else if (ui->method_select->currentIndex() == BREZ_REAL)
+        stairs_table(file_name, 5, 50, brezenhem_real_stairs);
+    else if (ui->method_select->currentIndex() == BREZ_INT)
+        stairs_table(file_name, 5, 50, brezenhem_int_stairs);
+    else if (ui->method_select->currentIndex() == BREZ_DEL)
+        stairs_table(file_name, 5, 50, brezenhem_del_stair_stairs);
+    else if (ui->method_select->currentIndex() == WU)
+        stairs_table(file_name, 5, 50, wu_stairs);
+    system("python3 stairs.py");
+}
+
+void MainWindow::on_clr_btn_clicked()
+{
+    field->clear();
 }

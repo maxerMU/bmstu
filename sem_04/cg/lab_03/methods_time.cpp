@@ -288,6 +288,8 @@ int time_table(const char *file_name, double angle, double r)
     if (!f)
         return OPEN_ER;
 
+    fprintf(f, "%lf\n", r);
+
     double t = get_avg_angle(angle, r, cda_time);
     fprintf(f, "%lf\n", t);
 

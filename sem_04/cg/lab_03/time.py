@@ -5,9 +5,10 @@ plt.figure(1, figsize=(12, 7))
 times = []
 r = 0
 with open("time_res.txt", "r") as f:
-    r = float(f.readline())
+    r = float(f.readline().replace(",", "."))
+
     for line in f:
-        times.append(float(line) * 1000000)
+        times.append(float(line.replace(",", ".")) * 1000000)
 
 y = range(len(times))
 

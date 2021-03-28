@@ -30,6 +30,10 @@ private slots:
 
     void on_time_btn_clicked();
 
+    void on_stair_btn_clicked();
+
+    void on_clr_btn_clicked();
+
 private:
     Ui::MainWindow *ui;
     QGraphicsScene *scene;

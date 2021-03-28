@@ -21,6 +21,7 @@ SOURCES += \
     mainwindow.cpp \
     color_view.cpp \
     methods.cpp \
+    methods_stair.cpp \
     methods_time.cpp \
     plot_funcs.cpp
 
@@ -29,6 +30,7 @@ HEADERS += \
     mainwindow.h \
     color_view.h \
     methods.h \
+    methods_stair.h \
     methods_time.h \
     plot_funcs.h
 

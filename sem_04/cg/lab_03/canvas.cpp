@@ -88,6 +88,8 @@ void canvas::clear()
     for (Figure *f : shapes)
         delete f;
     shapes.clear();
+
+    this->update();
 }
 
 void canvas::draw_point(long x, long y, QColor fg, QColor bg, size_t width)
