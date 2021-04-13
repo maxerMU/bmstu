@@ -1,0 +1,676 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1299</width>
+    <height>1000</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QPushButton" name="pick_fg_color_btn">
+    <property name="geometry">
+     <rect>
+      <x>1010</x>
+      <y>40</y>
+      <width>91</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>цвет линии</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pick_bg_color_btn">
+    <property name="geometry">
+     <rect>
+      <x>1010</x>
+      <y>80</y>
+      <width>91</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>цвет фона</string>
+    </property>
+   </widget>
+   <widget class="QGraphicsView" name="graphicsView_1">
+    <property name="geometry">
+     <rect>
+      <x>1110</x>
+      <y>40</y>
+      <width>21</width>
+      <height>21</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QGraphicsView" name="graphicsView_2">
+    <property name="geometry">
+     <rect>
+      <x>1110</x>
+      <y>80</y>
+      <width>21</width>
+      <height>21</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QGraphicsView" name="graphicsView">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>20</y>
+      <width>971</width>
+      <height>961</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="method_select">
+    <property name="geometry">
+     <rect>
+      <x>1010</x>
+      <y>130</y>
+      <width>261</width>
+      <height>25</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>1010</x>
+      <y>170</y>
+      <width>221</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Рисование окружности</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="xco_input">
+    <property name="geometry">
+     <rect>
+      <x>1010</x>
+      <y>220</y>
+      <width>51</width>
+      <height>25</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="yco_input">
+    <property name="geometry">
+     <rect>
+      <x>1080</x>
+      <y>220</y>
+      <width>51</width>
+      <height>25</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="r_input">
+    <property name="geometry">
+     <rect>
+      <x>1010</x>
+      <y>280</y>
+      <width>51</width>
+      <height>25</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="draw_circle_btn">
+    <property name="geometry">
+     <rect>
+      <x>1180</x>
+      <y>250</y>
+      <width>89</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Нарисовать</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>1010</x>
+      <y>320</y>
+      <width>281</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Концентрические окружности</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>1010</x>
+      <y>200</y>
+      <width>171</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Центр</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_4">
+    <property name="geometry">
+     <rect>
+      <x>1010</x>
+      <y>260</y>
+      <width>171</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Радиус</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_5">
+    <property name="geometry">
+     <rect>
+      <x>1010</x>
+      <y>350</y>
+      <width>171</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Центр</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="xcoc_input">
+    <property name="geometry">
+     <rect>
+      <x>1010</x>
+      <y>370</y>
+      <width>51</width>
+      <height>25</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="ycoc_input">
+    <property name="geometry">
+     <rect>
+      <x>1080</x>
+      <y>370</y>
+      <width>51</width>
+      <height>25</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_6">
+    <property name="geometry">
+     <rect>
+      <x>1010</x>
+      <y>410</y>
+      <width>91</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>min радиус</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="rstart_input">
+    <property name="geometry">
+     <rect>
+      <x>1010</x>
+      <y>430</y>
+      <width>51</width>
+      <height>25</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_7">
+    <property name="geometry">
+     <rect>
+      <x>1100</x>
+      <y>410</y>
+      <width>91</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>max радиус</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="rend_input">
+    <property name="geometry">
+     <rect>
+      <x>1100</x>
+      <y>430</y>
+      <width>51</width>
+      <height>25</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="draw_concircle_btn">
+    <property name="geometry">
+     <rect>
+      <x>1190</x>
+      <y>370</y>
+      <width>89</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Нарисовать</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="time_btn">
+    <property name="geometry">
+     <rect>
+      <x>1010</x>
+      <y>930</y>
+      <width>121</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Замер
+времени</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="clr_btn">
+    <property name="geometry">
+     <rect>
+      <x>1160</x>
+      <y>930</y>
+      <width>121</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Очистить</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="xcec_input">
+    <property name="geometry">
+     <rect>
+      <x>1010</x>
+      <y>690</y>
+      <width>51</width>
+      <height>25</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="draw_ellipse_btn">
+    <property name="geometry">
+     <rect>
+      <x>1190</x>
+      <y>550</y>
+      <width>89</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Нарисовать</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="ycec_input">
+    <property name="geometry">
+     <rect>
+      <x>1080</x>
+      <y>690</y>
+      <width>51</width>
+      <height>25</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_9">
+    <property name="geometry">
+     <rect>
+      <x>1010</x>
+      <y>470</y>
+      <width>221</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Рисование эллипса</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_10">
+    <property name="geometry">
+     <rect>
+      <x>1010</x>
+      <y>640</y>
+      <width>281</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Концентрические эллипсы</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="yce_input">
+    <property name="geometry">
+     <rect>
+      <x>1080</x>
+      <y>520</y>
+      <width>51</width>
+      <height>25</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_11">
+    <property name="geometry">
+     <rect>
+      <x>1010</x>
+      <y>500</y>
+      <width>171</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Центр</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="xce_input">
+    <property name="geometry">
+     <rect>
+      <x>1010</x>
+      <y>520</y>
+      <width>51</width>
+      <height>25</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="draw_con_ellipse_btn">
+    <property name="geometry">
+     <rect>
+      <x>1180</x>
+      <y>760</y>
+      <width>89</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Нарисовать</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="a_input">
+    <property name="geometry">
+     <rect>
+      <x>1010</x>
+      <y>600</y>
+      <width>51</width>
+      <height>25</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_12">
+    <property name="geometry">
+     <rect>
+      <x>1010</x>
+      <y>670</y>
+      <width>171</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Центр</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_13">
+    <property name="geometry">
+     <rect>
+      <x>1010</x>
+      <y>560</y>
+      <width>61</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>х
+полуось</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_15">
+    <property name="geometry">
+     <rect>
+      <x>1080</x>
+      <y>560</y>
+      <width>71</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>у
+полуось</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="b_input">
+    <property name="geometry">
+     <rect>
+      <x>1080</x>
+      <y>600</y>
+      <width>51</width>
+      <height>25</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_14">
+    <property name="geometry">
+     <rect>
+      <x>1010</x>
+      <y>720</y>
+      <width>71</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>х
+полуось</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="minb_input">
+    <property name="geometry">
+     <rect>
+      <x>1080</x>
+      <y>760</y>
+      <width>51</width>
+      <height>25</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_16">
+    <property name="geometry">
+     <rect>
+      <x>1080</x>
+      <y>720</y>
+      <width>71</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>у
+полуось</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="mina_input">
+    <property name="geometry">
+     <rect>
+      <x>1010</x>
+      <y>760</y>
+      <width>51</width>
+      <height>25</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_17">
+    <property name="geometry">
+     <rect>
+      <x>1010</x>
+      <y>790</y>
+      <width>61</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Шаг
+по х</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="n_input">
+    <property name="geometry">
+     <rect>
+      <x>1080</x>
+      <y>830</y>
+      <width>51</width>
+      <height>25</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_18">
+    <property name="geometry">
+     <rect>
+      <x>1080</x>
+      <y>790</y>
+      <width>91</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Количество
+эллипсов</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="step_a_input">
+    <property name="geometry">
+     <rect>
+      <x>1010</x>
+      <y>830</y>
+      <width>51</width>
+      <height>25</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="rstep_input">
+    <property name="geometry">
+     <rect>
+      <x>1200</x>
+      <y>430</y>
+      <width>51</width>
+      <height>25</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_8">
+    <property name="geometry">
+     <rect>
+      <x>1200</x>
+      <y>410</y>
+      <width>41</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Шаг</string>
+    </property>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
