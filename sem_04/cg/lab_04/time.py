@@ -23,7 +23,7 @@ plt.plot(x, circle_times[3*n:4*n], label="Средняя точка")
 plt.title("Окружности")
 
 plt.xlabel("Радиус окружности")
-plt.ylabel("Время в мкс")
+plt.ylabel("Время в мкс * 10000")
 
 plt.grid(True)
 plt.legend(loc=0)
@@ -50,7 +50,7 @@ plt.plot(x, ellipse_times[2*n:3*n], label="Брезенхем")
 plt.plot(x, ellipse_times[3*n:4*n], label="Средняя точка")
 
 plt.xlabel("x полуось")
-plt.ylabel(f"Время в мкс\nначальное значение y полуоси - {ry}")
+plt.ylabel(f"Время в мкс * 10000\nначальное значение y полуоси - {ry}")
 plt.grid(True)
 plt.legend(loc=0)
 

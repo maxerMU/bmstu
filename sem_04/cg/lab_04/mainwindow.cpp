@@ -86,10 +86,10 @@ void MainWindow::on_pick_bg_color_btn_clicked()
 
 void MainWindow::on_time_btn_clicked()
 {
-    const char *circle_file_name = "circle_time_res.txt";
-    circle_time_table(circle_file_name, 2000, 9000, 1000);
-    const char *ellipse_file_name = "ellipse_time_res.txt";
-    ellipse_time_table(ellipse_file_name, 4000, 2000, 1000, 10);
+    //const char *circle_file_name = "circle_time_res.txt";
+    //circle_time_table(circle_file_name, 10, 400, 1);
+    //const char *ellipse_file_name = "ellipse_time_res.txt";
+    //ellipse_time_table(ellipse_file_name, 10, 5, 1, 390);
     system("python3 time.py");
 }
 

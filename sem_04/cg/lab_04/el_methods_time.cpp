@@ -179,7 +179,7 @@ static double get_time(long rx, long ry, time_draw_ellipse_func_t func)
         func(0, 0, rx, ry);
     }
     el_clc = clock() - el_clc;
-    double el_time = ((double)el_clc / CLOCKS_PER_SEC) / EL_TIME_ITERATIONS;
+    double el_time = ((double)el_clc / CLOCKS_PER_SEC);// / EL_TIME_ITERATIONS;
 
     return el_time;
 }

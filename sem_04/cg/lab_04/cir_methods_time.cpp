@@ -149,7 +149,7 @@ static double get_time(long r, time_draw_circle_func_t func)
         func(params, 0, 0, r);
     }
     circle_clc = clock() - circle_clc;
-    double circle_time = ((double)circle_clc / CLOCKS_PER_SEC) / CIRCLE_TIME_ITERATIONS;
+    double circle_time = ((double)circle_clc / CLOCKS_PER_SEC);// / CIRCLE_TIME_ITERATIONS;
 
     return circle_time;
 }

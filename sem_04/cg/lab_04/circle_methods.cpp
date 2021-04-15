@@ -103,17 +103,14 @@ void circle_mid(const plot_params_t &params, long x, long y, long r)
         plot_mirror_points(params, xi, yi, x, y);
         plot_mirror_points(params, yi, xi, x, y);
 
+        xi++;
         if (di > 0)
         {
-            di += 8 * (xi - yi) + 12;
-            xi++;
             yi--;
+            di -= 8 * yi;
         }
-        else
-        {
-            di += 8 * xi + 4;
-            xi++;
-        }
+
+        di += 8 * xi + 4;
 
     }
 }
