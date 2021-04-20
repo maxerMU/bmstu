@@ -37,12 +37,14 @@ bool list_iterator<T>::is_invalid() const
 template <typename T>
 T &list_iterator<T>::operator *()
 {
+    // is_invalid
     return cur.lock()->get_data();
 }
 
 template <typename T>
 T &list_iterator<T>::operator ->()
 {
+    // is_invalid
     return cur.lock()->get_data();
 }
 

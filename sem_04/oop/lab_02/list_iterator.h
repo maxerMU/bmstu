@@ -21,20 +21,24 @@ public:
 
     T &operator *();
     T &operator ->();
+    //T *operator ->();
+    //const T &operator *() const;
+    //const T &operator ->() const;
 
-    std::shared_ptr<list_node<T> > get_spnode();
-    const std::shared_ptr<list_node<T> > get_cspnode() const;
+    std::shared_ptr<list_node<T>> get_spnode();
+    const std::shared_ptr<list_node<T>> get_cspnode() const;
+    // get_next, data,
 
     list_iterator<T> &operator ++(); // ++obj
     list_iterator<T> operator ++(int); // obj++
 
     list_iterator<T> &operator +=(long step);
-    list_iterator<T> operator +(long step);
+    list_iterator<T> operator +(long step) const;
 
     list_iterator<T> &operator =(const list_iterator<T> &iter);
 
-    bool operator !=(const list_iterator<T> &iter);
-    bool operator ==(const list_iterator<T> &iter);
+    bool operator !=(const list_iterator<T> &iter) const;
+    bool operator ==(const list_iterator<T> &iter) const;
 
 private:
     std::weak_ptr<list_node<T>> cur;

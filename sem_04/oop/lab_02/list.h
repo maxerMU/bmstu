@@ -16,9 +16,9 @@ class list : public abstract_container
 {
 public:
     list();
-    list(const list<T> &l);
-    list(const list<T> &&l);
-    list(T * const arr, long size);
+    explicit list(const list<T> &l);
+    list(list<T> &&l) noexcept;
+    list(const T * arr, long size);
     explicit list(std::initializer_list<T> elems);
     list(list_iterator<T> begin, list_iterator<T> end);
 
@@ -26,6 +26,7 @@ public:
 
     virtual bool is_empty() const override;
     virtual void clear() override;
+    // (bool)
 
     T pop_back();
     T pop_front();
@@ -38,8 +39,11 @@ public:
 
     list_iterator<T> insert(const list_iterator<T> &it, const T &data);
     list_iterator<T> insert(const list_iterator<T> &it, const list<T> &l);
+    // insert(it, it)
 
     void remove(const list_iterator<T> &it);
+    // remove (count)
+    // remove (begin, end)
 
     void reverse();
 
@@ -52,12 +56,15 @@ public:
     list<T> &operator +=(const list<T> &l);
 
     list<T> operator =(const list<T> &l);
-    list<T> operator =(const list<T> &&l);
+    list<T> operator =(list<T> &&l);
+    // init list =
 
     bool operator ==(const list<T> &l) const;
 
     list_iterator<T> begin();
     list_iterator<T> end();
+    con_list_iterator<T> begin() const;
+    con_list_iterator<T> end() const;
     con_list_iterator<T> cbegin() const;
     con_list_iterator<T> cend() const;
 
