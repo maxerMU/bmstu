@@ -84,10 +84,12 @@ void test_constructor_with_iterator()
     std::cout << "TEST CONSTRUCTOR WITH ITERATORS" << std::endl;
     try
     {
+
         long ar[5] = {1, 2, 3, 4, 5};
         long size = 5;
         list<long> ltemp {1, 2, 3, 4, 5};
-        list<long> l(ltemp.begin(), ltemp.end());
+        std::vector<long> vec {1, 2, 3, 4, 5};
+        list<long> l(vec.begin(), vec.end());
         bool test = cmp<long>(ar, size, l);
         if (test)
             std::cout << "PASSED" << std::endl;
@@ -257,8 +259,31 @@ void test_insert()
         long ar[6] = {1, 2, 3, 4, 5, 6};
         long size = 6;
         list<long> l {1, 2, 4, 5, 6};
-        list_iterator<long> it = l.begin() + 2;
+        list_iterator<long> it = l.begin() + (long) 2;
         l.insert(it, 3);
+        bool test = cmp<long>(ar, size, l);
+        if (test)
+            std::cout << "PASSED" << std::endl;
+        else
+            std::cout << "FAILED" << std::endl;
+    }
+    catch (list_exception &error)
+    {
+        std::cout << error.what() << std::endl;
+    }
+}
+
+void test_insert_with_iterators()
+{
+    std::cout << "TEST INSERT WITH ITERATORS" << std::endl;
+    try
+    {
+        long ar[6] = {1, 2, 3, 4, 5, 6};
+        long size = 6;
+        list<long> l {1, 2, 6};
+        list_iterator<long> it = l.begin() + (long) 2;
+        std::vector<long> vec {3, 4, 5};
+        l.insert(it, vec.begin(), vec.end());
         bool test = cmp<long>(ar, size, l);
         if (test)
             std::cout << "PASSED" << std::endl;
@@ -280,7 +305,7 @@ void test_insert_list()
         long size = 10;
         list<long> l1 {1, 2, 3, 4, 10};
         list<long> l2 {5, 6, 7, 8, 9};
-        list_iterator<long> it = l1.begin() + 4;
+        list_iterator<long> it = l1.begin() + (long) 4;
         l1.insert(it, l2);
         bool test = cmp<long>(ar, size, l1);
         if (test)
@@ -300,10 +325,32 @@ void test_remove()
     try
     {
         long ar[5] = {1, 2, 4, 5, 6};
-        long size = 6;
+        long size = 5;
         list<long> l {1, 2, 3, 4, 5, 6};
-        list_iterator<long> it = l.begin() + 2;
+        list_iterator<long> it = l.begin() + (long) 2;
         l.remove(it);
+        bool test = cmp<long>(ar, size, l);
+        if (test)
+            std::cout << "PASSED" << std::endl;
+        else
+            std::cout << "FAILED" << std::endl;
+    }
+    catch (list_exception &error)
+    {
+        std::cout << error.what() << std::endl;
+    }
+}
+
+void test_remove_count()
+{
+    std::cout << "TEST REMOVE COUNT" << std::endl;
+    try
+    {
+        long ar[3] = {1, 2, 6};
+        long size = 3;
+        list<long> l {1, 2, 3, 4, 5, 6};
+        list_iterator<long> it = l.begin() + (long) 2;
+        l.remove(it, 3);
         bool test = cmp<long>(ar, size, l);
         if (test)
             std::cout << "PASSED" << std::endl;
@@ -386,7 +433,7 @@ void test_list_plus_elem()
         long ar[6] = {1, 2, 3, 4, 5, 6};
         long size = 6;
         list<long> l {1, 2, 3, 4, 5};
-        list<long> l1 = l + 6;
+        list<long> l1 = l + (long) 6;
         bool test = cmp<long>(ar, size, l1);
         if (test)
             std::cout << "PASSED" << std::endl;
@@ -435,8 +482,10 @@ int main()
     test_push_list_front();
     test_push_list_back();
     test_insert();
+    test_insert_with_iterators();
     test_insert_list();
     test_remove();
+    test_remove_count();
     test_reverse();
     test_merge_list_elem();
     test_merge_list_list();

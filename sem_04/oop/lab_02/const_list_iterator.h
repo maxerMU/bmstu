@@ -19,20 +19,35 @@ public:
     virtual void next();
     virtual bool is_invalid() const;
 
+    operator bool();
+
     const T &operator *() const;
-    const T &operator ->() const;
+    const T *operator ->() const;
+
+    std::shared_ptr<list_node<T>> get_spnode() const;
+
+    std::shared_ptr<list_node<T>> get_next() const;
+    const T &get_data() const;
+
+    void set_next(const std::shared_ptr<list_node<T>> &next);
+    void set_data(const T &data);
+
 
     con_list_iterator<T> &operator ++(); // ++obj
     con_list_iterator<T> operator ++(int); // obj++
 
+    con_list_iterator<T> &operator +=(long step);
+    con_list_iterator<T> operator +(long step) const;
+
     con_list_iterator<T> &operator =(const con_list_iterator<T> &iter);
 
-    bool operator !=(const con_list_iterator<T> &iter);
-    bool operator ==(const con_list_iterator<T> &iter);
+    bool operator !=(const con_list_iterator<T> &iter) const;
+    bool operator ==(const con_list_iterator<T> &iter) const;
 
 private:
     std::weak_ptr<list_node<T>> cur;
 };
+
 
 #include "const_list_iterator.hpp"
 

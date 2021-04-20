@@ -38,6 +38,12 @@ T &list_node<T>::get_data()
 }
 
 template <typename T>
+T *list_node<T>::get_pdata()
+{
+    return &data;
+}
+
+template <typename T>
 const T &list_node<T>::get_cdata() const
 {
     return data;

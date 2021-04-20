@@ -1,6 +1,38 @@
 #ifndef LIST_ITERATOR_HPP
 #define LIST_ITERATOR_HPP
 
+#include "list_exceptions.h"
+
+template <typename T>
+list_iterator<T>::operator bool()
+{
+    return is_invalid();
+}
+
+template <typename T>
+std::shared_ptr<list_node<T>> list_iterator<T>::get_next() const
+{
+    return cur.lock()->get_next();
+}
+
+template <typename T>
+const T &list_iterator<T>::get_data() const
+{
+    return cur.lock()->get_data();
+}
+
+template <typename T>
+void list_iterator<T>::set_next(const std::shared_ptr<list_node<T> > &next)
+{
+    cur.lock()->set_next(next);
+}
+
+template <typename T>
+void list_iterator<T>::set_data(const T &data)
+{
+    cur.lock()->set_data(data);
+}
+
 template <typename T>
 list_iterator<T>::list_iterator()
     :cur(std::weak_ptr<list_node<T>>())
@@ -22,7 +54,7 @@ list_iterator<T>::list_iterator(const list_iterator<T> &iter)
 template <typename T>
 void list_iterator<T>::next()
 {
-    if (cur.lock())
+    if (!is_invalid())
     {
         cur = cur.lock()->get_next();
     }
@@ -37,28 +69,68 @@ bool list_iterator<T>::is_invalid() const
 template <typename T>
 T &list_iterator<T>::operator *()
 {
-    // is_invalid
+    if (is_invalid())
+    {
+        auto timenow = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+        throw list_iterator_exception(ctime(&timenow), __FILE__, typeid(list_iterator).name(), __FUNCTION__);
+    }
+
     return cur.lock()->get_data();
 }
 
 template <typename T>
-T &list_iterator<T>::operator ->()
+T *list_iterator<T>::operator ->()
 {
-    // is_invalid
+    if (is_invalid())
+    {
+        auto timenow = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+        throw list_iterator_exception(ctime(&timenow), __FILE__, typeid(list_iterator).name(), __FUNCTION__);
+    }
+
+    return cur.lock()->get_pdata();
+}
+
+template <typename T>
+const T &list_iterator<T>::operator *() const
+{
+    if (is_invalid())
+    {
+        auto timenow = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+        throw list_iterator_exception(ctime(&timenow), __FILE__, typeid(list_iterator).name(), __FUNCTION__);
+    }
+
     return cur.lock()->get_data();
 }
 
 template <typename T>
-std::shared_ptr<list_node<T>> list_iterator<T>::get_spnode()
+const T *list_iterator<T>::operator ->() const
 {
-    return cur.lock();
+    if (is_invalid())
+    {
+        auto timenow = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+        throw list_iterator_exception(ctime(&timenow), __FILE__, typeid(list_iterator).name(), __FUNCTION__);
+    }
+
+    return cur.lock()->get_pdata();
 }
 
 template <typename T>
-const std::shared_ptr<list_node<T>> list_iterator<T>::get_cspnode() const
+std::shared_ptr<list_node<T>> list_iterator<T>::get_spnode() const
 {
+    if (is_invalid())
+    {
+        auto timenow = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+        throw list_iterator_exception(ctime(&timenow), __FILE__, typeid(list_iterator).name(), __FUNCTION__);
+    }
+
     return cur.lock();
 }
+
+//template <typename T>
+//const std::shared_ptr<list_node<T>> list_iterator<T>::get_cspnode() const
+//{
+//    return cur.lock();
+//}
 
 template <typename T>
 list_iterator<T> &list_iterator<T>::operator ++()
@@ -85,7 +157,7 @@ list_iterator<T> &list_iterator<T>::operator +=(long step)
 }
 
 template <typename T>
-list_iterator<T> list_iterator<T>::operator +(long step)
+list_iterator<T> list_iterator<T>::operator +(long step) const
 {
     list_iterator it(*this);
     it += step;
@@ -95,18 +167,18 @@ list_iterator<T> list_iterator<T>::operator +(long step)
 template <typename T>
 list_iterator<T> &list_iterator<T>::operator =(const list_iterator<T> &iter)
 {
-    cur = iter.cur.lock();
+    cur = iter.cur;
     return *this;
 }
 
 template <typename T>
-bool list_iterator<T>::operator !=(const list_iterator<T> &iter)
+bool list_iterator<T>::operator !=(const list_iterator<T> &iter) const
 {
     return !(cur.lock() == iter.cur.lock()); // != removed in c++20
 }
 
 template <typename T>
-bool list_iterator<T>::operator ==(const list_iterator<T> &iter)
+bool list_iterator<T>::operator ==(const list_iterator<T> &iter) const
 {
     return cur.lock() == iter.cur.lock();
 }

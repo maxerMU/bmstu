@@ -2,6 +2,12 @@
 #define LIST_HPP
 
 template <typename T>
+list<T>::operator bool() const
+{
+    return size;
+}
+
+template <typename T>
 list<T>::list()
     :head(std::shared_ptr<list_node<T>>()),
      tail(std::shared_ptr<list_node<T>>()),
@@ -20,7 +26,7 @@ list<T>::list(const list<T> &l)
 }
 
 template <typename T>
-list<T>::list(const list<T> &&l)
+list<T>::list(list<T> &&l) noexcept
     :head(l.get_head()),
      tail(l.get_tail()),
      size(l.get_size())
@@ -28,7 +34,7 @@ list<T>::list(const list<T> &&l)
 }
 
 template <typename T>
-list<T>::list(T * const arr, long size)
+list<T>::list(const T *arr, long size)
     :head(std::shared_ptr<list_node<T>>()),
      tail(std::shared_ptr<list_node<T>>()),
      size(0)
@@ -53,7 +59,7 @@ list<T>::list(T * const arr, long size)
 }
 
 template <typename T>
-list<T>::list(std::initializer_list<T> elems)
+list<T>::list(const std::initializer_list<T> &elems)
     :head(std::shared_ptr<list_node<T>>()),
      tail(std::shared_ptr<list_node<T>>()),
      size(0)
@@ -63,18 +69,45 @@ list<T>::list(std::initializer_list<T> elems)
 }
 
 template <typename T>
-list<T>::list(list_iterator<T> begin, list_iterator<T> end)
+list<T> list<T>::operator =(const std::initializer_list<T> &in_list)
+{
+    clear();
+    for (auto elem : in_list)
+        push_back(elem);
+}
+
+//template <typename T>
+//list<T>::list(list_iterator<T> begin, list_iterator<T> end)
+//    :head(std::shared_ptr<list_node<T>>()),
+//     tail(std::shared_ptr<list_node<T>>()),
+//     size(0)
+//{
+//    for (list_iterator<T> it = begin; it != end; ++it)
+//    {
+//        if (it.is_invalid())
+//        {
+//            auto timenow = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+//            throw list_iterator_exception(ctime(&timenow), __FILE__, typeid(list).name(), __FUNCTION__);
+//        }
+//
+//        push_back(*it);
+//    }
+//}
+
+template <typename T>
+template <typename iter>
+list<T>::list(iter begin, iter end)
     :head(std::shared_ptr<list_node<T>>()),
      tail(std::shared_ptr<list_node<T>>()),
      size(0)
 {
-    for (list_iterator<T> it = begin; it != end; ++it)
+    for (iter it = begin; it != end; ++it)
     {
-        if (it.is_invalid())
-        {
-            auto timenow = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
-            throw list_iterator_exception(ctime(&timenow), __FILE__, typeid(list).name(), __FUNCTION__);
-        }
+//        if (it)
+//        {
+//            auto timenow = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+//            throw list_iterator_exception(ctime(&timenow), __FILE__, typeid(list).name(), __FUNCTION__);
+//        }
 
         push_back(*it);
     }
@@ -120,11 +153,10 @@ T list<T>::pop_back()
     {
         list_iterator<T> it(this->begin());
         list_iterator<T> tail_it(tail);
-        for (; it + 1 != tail_it; ++it);
+        for (; it + (long) 1 != tail_it; ++it);
 
-        std::shared_ptr<list_node<T>> spnode = it.get_spnode();
-        spnode->set_next(std::shared_ptr<list_node<T>>());
-        tail = spnode;
+        it.set_next(std::shared_ptr<list_node<T>>());
+        tail = it.get_spnode();
     }
     size--;
 
@@ -232,7 +264,7 @@ list_iterator<T> list<T>::insert(const list_iterator<T> &it, const T &data)
         throw list_iterator_exception(ctime(&timenow), __FILE__, typeid(list).name(), __FUNCTION__);
     }
 
-    if (it.get_cspnode() == head)
+    if (it.get_spnode() == head)
     {
         push_front(data);
         return list_iterator<T>(head);
@@ -251,10 +283,10 @@ list_iterator<T> list<T>::insert(const list_iterator<T> &it, const T &data)
     }
 
     list_iterator<T> prev_it = begin();
-    for (; prev_it + 1 != it; ++prev_it);
+    for (; prev_it + (long) 1 != it; ++prev_it);
 
-    pnode->set_next(it.get_cspnode());
-    prev_it.get_spnode()->set_next(pnode);
+    pnode->set_next(it.get_spnode());
+    prev_it.set_next(pnode);
 
     size++;
 
@@ -279,6 +311,24 @@ list_iterator<T> list<T>::insert(const list_iterator<T> &it, const list<T> &l)
 }
 
 template <typename T>
+template <typename iter>
+list_iterator<T> list<T>::insert(const list_iterator<T> &it, iter begin, iter end)
+{
+    if (it.is_invalid())
+    {
+        auto timenow = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+        throw list_iterator_exception(ctime(&timenow), __FILE__, typeid(list).name(), __FUNCTION__);
+    }
+
+    list_iterator<T> res_it;
+
+    for (iter cur_el_it = begin; cur_el_it != end; ++cur_el_it)
+        res_it = insert(it, *cur_el_it);
+
+    return res_it;
+}
+
+template <typename T>
 void list<T>::remove(const list_iterator<T> &it)
 {
     if (it.is_invalid())
@@ -287,15 +337,40 @@ void list<T>::remove(const list_iterator<T> &it)
         throw list_iterator_exception(ctime(&timenow), __FILE__, typeid(list).name(), __FUNCTION__);
     }
 
-    if (it.get_cspnode() == head)
+    if (it.get_spnode() == head)
         pop_front();
-    else if (it.get_cspnode() == tail)
+    else if (it.get_spnode() == tail)
         pop_back();
     else
     {
         list_iterator<T> prev = begin();
-        for (; prev + 1 != it; ++prev);
-        prev.get_spnode()->set_next(it.get_cspnode()->get_next());
+        for (; prev + (long) 1 != it; ++prev);
+        prev.set_next(it.get_next());
+        size--;
+    }
+}
+
+template <typename T>
+void list<T>::remove(const list_iterator<T> &it, size_t count)
+{
+    list_iterator<T> cur_it = it;
+    for (size_t i = 0; i < count; i++)
+    {
+        list_iterator<T> next = cur_it + (long) 1;
+        remove(cur_it);
+        cur_it = next;
+    }
+}
+
+template <typename T>
+void list<T>::remove(const list_iterator<T> &begin, const list_iterator<T> &end)
+{
+    list_iterator<T> cur_it = begin;
+    while (cur_it != end)
+    {
+        list_iterator<T> next = cur_it + (long) 1;
+        remove(cur_it);
+        cur_it = next;
     }
 }
 
@@ -377,7 +452,7 @@ list<T> list<T>::operator =(const list<T> &l)
 }
 
 template <typename T>
-list<T> list<T>::operator =(const list<T> &&l)
+list<T> list<T>::operator =(list<T> &&l) const
 {
     clear();
 

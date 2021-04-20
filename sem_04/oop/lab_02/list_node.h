@@ -17,6 +17,7 @@ public:
     void set_next(const std::shared_ptr<list_node<T>> &node);
 
     T &get_data();
+    T *get_pdata();
     std::shared_ptr<list_node<T>> get_next() const;
     const T &get_cdata() const;
 
