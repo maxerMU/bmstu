@@ -30,15 +30,8 @@ public:
     const T &operator *() const;
     const T *operator ->() const;
 
-    //std::shared_ptr<list_node<T>> get_spnode() const;
-
-    //std::shared_ptr<list_node<T>> get_next() const;
     const T &get_data() const;
     const T &get_next_data() const;
-
-    //void set_next(const std::shared_ptr<list_node<T>> &next);
-    //void set_data(const T &data);
-
 
     list_iterator<T> &operator ++(); // ++obj
     list_iterator<T> operator ++(int); // obj++

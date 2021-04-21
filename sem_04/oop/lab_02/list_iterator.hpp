@@ -9,12 +9,6 @@ list_iterator<T>::operator bool()
     return is_invalid();
 }
 
-//template <typename T>
-//std::shared_ptr<list_node<T>> list_iterator<T>::get_next() const
-//{
-//    return cur.lock()->get_next();
-//}
-//
 template <typename T>
 const T &list_iterator<T>::get_data() const
 {
@@ -26,18 +20,6 @@ const T &list_iterator<T>::get_next_data() const
 {
     return cur.lock()->get_next()->get_data();
 }
-//
-//template <typename T>
-//void list_iterator<T>::set_next(const std::shared_ptr<list_node<T> > &next)
-//{
-//    cur.lock()->set_next(next);
-//}
-//
-//template <typename T>
-//void list_iterator<T>::set_data(const T &data)
-//{
-//    cur.lock()->set_data(data);
-//}
 
 template <typename T>
 list_iterator<T>::list_iterator()
@@ -119,24 +101,6 @@ const T *list_iterator<T>::operator ->() const
 
     return cur.lock()->get_pdata();
 }
-
-//template <typename T>
-//std::shared_ptr<list_node<T>> list_iterator<T>::get_spnode() const
-//{
-//    if (is_invalid())
-//    {
-//        auto timenow = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
-//        throw list_iterator_exception(ctime(&timenow), __FILE__, typeid(list_iterator).name(), __FUNCTION__);
-//    }
-//
-//    return cur.lock();
-//}
-
-//template <typename T>
-//const std::shared_ptr<list_node<T>> list_iterator<T>::get_cspnode() const
-//{
-//    return cur.lock();
-//}
 
 template <typename T>
 list_iterator<T> &list_iterator<T>::operator ++()

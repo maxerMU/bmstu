@@ -76,24 +76,6 @@ list<T> list<T>::operator =(const std::initializer_list<T> &in_list)
         push_back(elem);
 }
 
-//template <typename T>
-//list<T>::list(list_iterator<T> begin, list_iterator<T> end)
-//    :head(std::shared_ptr<list_node<T>>()),
-//     tail(std::shared_ptr<list_node<T>>()),
-//     size(0)
-//{
-//    for (list_iterator<T> it = begin; it != end; ++it)
-//    {
-//        if (it.is_invalid())
-//        {
-//            auto timenow = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
-//            throw list_iterator_exception(ctime(&timenow), __FILE__, typeid(list).name(), __FUNCTION__);
-//        }
-//
-//        push_back(*it);
-//    }
-//}
-
 template <typename T>
 template <typename iter>
 list<T>::list(iter begin, iter end)
@@ -102,15 +84,7 @@ list<T>::list(iter begin, iter end)
      size(0)
 {
     for (iter it = begin; it != end; ++it)
-    {
-//        if (it)
-//        {
-//            auto timenow = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
-//            throw list_iterator_exception(ctime(&timenow), __FILE__, typeid(list).name(), __FUNCTION__);
-//        }
-
         push_back(*it);
-    }
 }
 
 template <typename T>
@@ -157,8 +131,6 @@ T list<T>::pop_back()
 
         it.cur.lock()->set_next(std::shared_ptr<list_node<T>>());
         tail = it.cur.lock();
-        //it.set_next(std::shared_ptr<list_node<T>>());
-        //tail = it.get_spnode();
     }
     size--;
 
