@@ -7,8 +7,12 @@
 #include "list_node.h"
 
 template <typename T>
+class list;
+
+template <typename T>
 class list_iterator : std::iterator<std::forward_iterator_tag, list_node<T>>
 {
+    friend class list<T>;
 public:
     list_iterator();
     explicit list_iterator(const std::shared_ptr<list_node<T>> &pnode);
@@ -26,13 +30,14 @@ public:
     const T &operator *() const;
     const T *operator ->() const;
 
-    std::shared_ptr<list_node<T>> get_spnode() const;
+    //std::shared_ptr<list_node<T>> get_spnode() const;
 
-    std::shared_ptr<list_node<T>> get_next() const;
+    //std::shared_ptr<list_node<T>> get_next() const;
     const T &get_data() const;
+    const T &get_next_data() const;
 
-    void set_next(const std::shared_ptr<list_node<T>> &next);
-    void set_data(const T &data);
+    //void set_next(const std::shared_ptr<list_node<T>> &next);
+    //void set_data(const T &data);
 
 
     list_iterator<T> &operator ++(); // ++obj

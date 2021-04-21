@@ -155,8 +155,10 @@ T list<T>::pop_back()
         list_iterator<T> tail_it(tail);
         for (; it + (long) 1 != tail_it; ++it);
 
-        it.set_next(std::shared_ptr<list_node<T>>());
-        tail = it.get_spnode();
+        it.cur.lock()->set_next(std::shared_ptr<list_node<T>>());
+        tail = it.cur.lock();
+        //it.set_next(std::shared_ptr<list_node<T>>());
+        //tail = it.get_spnode();
     }
     size--;
 
@@ -264,7 +266,7 @@ list_iterator<T> list<T>::insert(const list_iterator<T> &it, const T &data)
         throw list_iterator_exception(ctime(&timenow), __FILE__, typeid(list).name(), __FUNCTION__);
     }
 
-    if (it.get_spnode() == head)
+    if (it.cur.lock() == head)
     {
         push_front(data);
         return list_iterator<T>(head);
@@ -285,8 +287,8 @@ list_iterator<T> list<T>::insert(const list_iterator<T> &it, const T &data)
     list_iterator<T> prev_it = begin();
     for (; prev_it + (long) 1 != it; ++prev_it);
 
-    pnode->set_next(it.get_spnode());
-    prev_it.set_next(pnode);
+    pnode->set_next(it.cur.lock());
+    prev_it.cur.lock()->set_next(pnode);
 
     size++;
 
@@ -337,15 +339,15 @@ void list<T>::remove(const list_iterator<T> &it)
         throw list_iterator_exception(ctime(&timenow), __FILE__, typeid(list).name(), __FUNCTION__);
     }
 
-    if (it.get_spnode() == head)
+    if (it.cur.lock() == head)
         pop_front();
-    else if (it.get_spnode() == tail)
+    else if (it.cur.lock() == tail)
         pop_back();
     else
     {
         list_iterator<T> prev = begin();
         for (; prev + (long) 1 != it; ++prev);
-        prev.set_next(it.get_next());
+        prev.cur.lock()->set_next(it.cur.lock()->get_next());
         size--;
     }
 }
