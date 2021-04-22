@@ -23,8 +23,8 @@ def print_table(table):
         print(f"|{i : 5}|{table[i][0] : 5}|{table[i][1] : 5}|{table[i][2] : 5}|")
 
 def change_point_weight(table):
-    i = int(input("Введите номер точки, вес которой хотите поменять: "))
-    weight = int(input("Введите новый вес точки: "))
+    i = int(input("Input point number: "))
+    weight = int(input("Input new point weight"))
 
     table[i][2] = weight
 
@@ -42,12 +42,12 @@ def main():
     
     choise = 10
     while (choise):
-        print("1 - Печать таблицы\n" +
-              "2 - Изменение веса точки\n" +
-              "3 - Построение графиков\n" +
-              "0 - Выход")
+        print("1 - Print table\n" +
+              "2 - Change point weight\n" +
+              "3 - Plot graphs\n" +
+              "0 - Exit")
 
-        choise = int(input("Ваш выбор: "))
+        choise = int(input("Your choise: "))
 
         if choise == 1:
             print_table(table)
