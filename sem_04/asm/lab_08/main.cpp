@@ -13,11 +13,11 @@ size_t asmstrlen(const char *str)
     __asm__ (".intel_syntax noprefix\n"
              "mov RDI, %1\n"
              "mov RCX, -1\n"
-             "mov AL, 0\n"
+             "xor AL, AL\n"
              "REPNZ SCASB\n"
              "mov RAX, -1\n"
              "sub RAX, RCX\n"
-             "sub RAX, 1\n"
+             "dec RAX\n"
              "mov %0, RAX\n"
              : "=r"(len)
              : "r"(str)
