@@ -21,26 +21,38 @@ std::shared_ptr<model> model_builder::get()
     return _model;
 }
 
-void model_builder::build_center(double x, double y, double z)
+void model_builder::build_center(const point &_point)
 {
     if (!is_build())
         throw build_exception();
 
-    _model->set_center(point(x, y, z));
+    _model->set_center(_point);
 }
 
-void model_builder::build_point(double x, double y, double z)
+void model_builder::build_point(const point &_point)
 {
     if (!is_build())
         throw build_exception();
 
-    _model->add_point(point(x, y, z));
+    _model->add_point(_point);
 }
 
-void model_builder::build_edge(size_t pt_index1, size_t pt_index2)
+void model_builder::build_edge(const edge &_edge)
 {
     if (!is_build())
         throw build_exception();
 
-    _model->add_edge(edge(pt_index1, pt_index2));
+    _model->add_edge(_edge);
+}
+
+void model_builder::build_points(const std::vector<point> &points)
+{
+    for (auto _point : points)
+        build_point(_point);
+}
+
+void model_builder::build_edges(const std::vector<edge> &edges)
+{
+    for (auto _edge : edges)
+        build_edge(_edge);
 }

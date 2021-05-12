@@ -260,6 +260,23 @@ void MainWindow::scan_move_camera_params(double &dx, double &dy, double &dz) con
         throw ui_field_format_exception();
 }
 
+void MainWindow::scan_rotate_camera_params(double &ox, double &oy, double &oz) const
+{
+    bool is_double;
+
+    ox = ui->cam_ox_inp->text().toDouble(&is_double);
+    if (!is_double)
+        throw ui_field_format_exception();
+
+    oy = ui->cam_oy_inp->text().toDouble(&is_double);
+    if (!is_double)
+        throw ui_field_format_exception();
+
+    oz = ui->cam_oz_inp->text().toDouble(&is_double);
+    if (!is_double)
+        throw ui_field_format_exception();
+}
+
 void MainWindow::on_move_cam_but_clicked()
 {
     try
@@ -269,6 +286,26 @@ void MainWindow::on_move_cam_but_clicked()
         point move(dx, dy, dz);
         size_t index = ui->cam_pick->currentIndex();
         std::shared_ptr<base_command> com(new move_camera_command(index, move));
+
+        _facade.execute_command(com);
+
+        render_scene();
+    }
+    catch (base_exception &ex)
+    {
+        QMessageBox::warning(this, "Error", QString(ex.what()));
+    }
+}
+
+void MainWindow::on_rotate_cam_btn_clicked()
+{
+    try
+    {
+        double ox, oy, oz;
+        scan_rotate_camera_params(ox, oy, oz);
+        point rotate(ox, oy, oz);
+        size_t index = ui->cam_pick->currentIndex();
+        std::shared_ptr<base_command> com(new rotate_camera_command(index, rotate));
 
         _facade.execute_command(com);
 

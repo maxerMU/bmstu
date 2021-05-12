@@ -61,3 +61,9 @@ void move_camera_command::execute(const std::shared_ptr<base_controller> &_contr
     point rotate(0, 0, 0);
     _controller->transform_camera(index, move, rotate);
 }
+
+void rotate_camera_command::execute(const std::shared_ptr<base_controller> &_controller) const
+{
+    point move(0, 0, 0);
+    _controller->transform_camera(index, move, rotate);
+}

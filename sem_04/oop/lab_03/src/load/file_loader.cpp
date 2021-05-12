@@ -1,7 +1,10 @@
 #include <fstream>
+#include <vector>
 
 #include "load_exceptions.h"
 #include "file_loader.h"
+#include "point.h"
+#include "edge.h"
 
 file_loader::file_loader()
 {
@@ -20,34 +23,36 @@ std::shared_ptr<model> file_loader::load_model(const std::string &name)
     double x, y, z;
     if (!(file >> x >> y >> z))
         throw file_format_exception();
-    _builder->build_center(x, y, z);
+    _builder->build_center(point(x, y, z));
 
-    size_t points = 0;
-    file >> points;
-
-    if (points <= 1)
+    size_t points_count = 0;
+    file >> points_count;
+    if (points_count <= 1)
         throw file_format_exception();
 
-    for (size_t i = 0; i < points; i++)
+    std::vector<point> points;
+    for (size_t i = 0; i < points_count; i++)
     {
         if (!(file >> x >> y >> z))
             throw file_format_exception();
-        _builder->build_point(x, y, z);
+        points.push_back(point(x, y, z));
     }
+    _builder->build_points(points);
 
-    size_t edges = 0;
-    file >> edges;
-
-    if (edges < 1)
+    size_t edges_count = 0;
+    file >> edges_count;
+    if (edges_count < 1)
         throw file_format_exception();
 
-    for (size_t i = 0; i < edges; i++)
+    std::vector<edge> edges;
+    for (size_t i = 0; i < edges_count; i++)
     {
         size_t ind1, ind2;
         if (!(file >> ind1 >> ind2))
             throw file_format_exception();
-        _builder->build_edge(ind1, ind2);
+        edges.push_back(edge(ind1, ind2));
     }
+    _builder->build_edges(edges);
 
     return _builder->get();
 }

@@ -20,9 +20,9 @@ void camera::move(const point &move)
 
 void camera::rotate(const point &rotate)
 {
-    x_angle += (rotate.get_x() * M_PI) / 180;
-    y_angle += (rotate.get_y() * M_PI) / 180;
-    z_angle += (rotate.get_z() * M_PI) / 180;
+    x_angle += rotate.get_x();
+    y_angle += rotate.get_y();
+    z_angle += rotate.get_z();
 }
 
 point camera::get_pos() const

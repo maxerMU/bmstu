@@ -130,4 +130,16 @@ private:
     point move;
 };
 
+class rotate_camera_command : public base_command
+{
+public:
+    rotate_camera_command(size_t index, const point &rotate) : index(index), rotate(rotate) {}
+
+    virtual void execute(const std::shared_ptr<base_controller> &_controller) const override;
+
+private:
+    size_t index;
+    point rotate;
+};
+
 #endif // COMMANDS_H

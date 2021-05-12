@@ -40,6 +40,8 @@ private slots:
 
     void on_move_cam_but_clicked();
 
+    void on_rotate_cam_btn_clicked();
+
 private:
     void setup_scene();
     void render_scene();
@@ -47,6 +49,7 @@ private:
     void scan_scale_model_params(double &kx, double &ky, double &kz) const;
     void scan_rotate_model_params(double &ox, double &oy, double &oz) const;
     void scan_move_camera_params(double &dx, double &dy, double &dz) const;
+    void scan_rotate_camera_params(double &ox, double &oy, double &oz) const;
 
     Ui::MainWindow *ui;
 
