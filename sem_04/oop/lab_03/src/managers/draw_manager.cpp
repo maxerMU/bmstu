@@ -1,3 +1,4 @@
+#include <math.h>
 #include "draw_manager.h"
 #include "model.h"
 #include "camera.h"
@@ -35,6 +36,21 @@ void draw_manager::visit(const model &_model)
 
 void draw_manager::proect_point(point &_point)
 {
-    _point.set_x(_point.get_x() - cur_cam->get_pos().get_x());
-    _point.set_y(_point.get_y() - cur_cam->get_pos().get_y());
+    point move(cur_cam->get_pos().get_x(), cur_cam->get_pos().get_x(), 0);
+
+    _point.move(move);
+
+    point center(0, 0, 0);
+    point rotate(cur_cam->get_xangle(), cur_cam->get_yangle(), cur_cam->get_zangle());
+    _point.rotate(center, rotate);
+
+    double eps = 1e-10;
+    double dist = cur_cam->get_pos().get_z() + _point.get_z();
+
+    if (fabs(dist) < eps)
+        dist = eps;
+
+    double dist_coef = cur_cam->get_pos().get_z() / dist;
+    _point.set_x(_point.get_x() * dist_coef);
+    _point.set_y(_point.get_y() * dist_coef);
 }
