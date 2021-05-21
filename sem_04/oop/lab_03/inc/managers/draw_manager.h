@@ -26,4 +26,16 @@ private:
     std::shared_ptr<base_drawer> _drawer;
 };
 
+class draw_manager_creator
+{
+public:
+    std::shared_ptr<draw_manager> get_manager();
+
+private:
+    void create_manager();
+
+    std::shared_ptr<draw_manager> _manager;
+};
+
+
 #endif // DRAW_MANAGER_H

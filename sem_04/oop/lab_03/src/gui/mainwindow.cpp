@@ -1,5 +1,6 @@
 #include <QMessageBox>
 #include <QString>
+#include <QFileDialog>
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
@@ -15,7 +16,6 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     setup_scene();
-    ui->file_inp->setText(QString("data/cube.txt"));
 }
 
 MainWindow::~MainWindow()
@@ -50,12 +50,13 @@ void MainWindow::render_scene()
 
 void MainWindow::on_load_mod_but_clicked()
 {
-    std::shared_ptr<base_command> com(new load_command(ui->file_inp->text().toStdString()));
+    auto file = QFileDialog::getOpenFileName();
+    std::shared_ptr<base_command> com(new load_command(file.toUtf8().data()));
 
     try
     {
         _facade.execute_command(com);
-        ui->model_pick->addItem(ui->file_inp->text());
+        ui->model_pick->addItem(file);
 
         render_scene();
     }
@@ -84,16 +85,13 @@ void MainWindow::on_remove_mod_but_clicked()
 
 void MainWindow::on_add_cam_but_clicked()
 {
-    point cam_pos(-ui->graphicsView->width() / 2, -ui->graphicsView->height() / 2, 50);
-    std::shared_ptr<base_command> com(new add_camera_command(cam_pos));
+    auto file = QFileDialog::getOpenFileName();
+    std::shared_ptr<base_command> com(new load_camera_command(file.toUtf8().data()));
 
     try
     {
         _facade.execute_command(com);
-
-        cams_count++;
-        QString str = QString::asprintf("%s%zu", "Camera №", cams_count);
-        ui->cam_pick->addItem(str);
+        ui->cam_pick->addItem(file);
     }
     catch (base_exception &ex)
     {

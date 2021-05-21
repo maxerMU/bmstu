@@ -27,6 +27,30 @@ public:
     }
 };
 
+class no_director_exception: public base_exception
+{
+public:
+    no_director_exception() = default;
+    explicit no_director_exception(std::string &message): base_exception(message) {}
+
+    const char *what() const noexcept override
+    {
+        return "Firstly set any camera.";
+    }
+};
+
+class config_exception: public base_exception
+{
+public:
+    config_exception() = default;
+    explicit config_exception(std::string &message): base_exception(message) {}
+
+    const char *what() const noexcept override
+    {
+        return "Incorrect config.";
+    }
+};
+
 class no_camera_exception: public base_exception
 {
 public:

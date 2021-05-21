@@ -14,4 +14,15 @@ public:
                        const point &rotate) const;
 };
 
+class reform_manager_creator
+{
+public:
+    std::shared_ptr<reform_manager> get_manager();
+
+private:
+    void create_manager();
+
+    std::shared_ptr<reform_manager> _manager;
+};
+
 #endif // REFORM_MANAGER_H

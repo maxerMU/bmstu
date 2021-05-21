@@ -4,6 +4,20 @@
 #include "camera.h"
 #include "composite.h"
 
+std::shared_ptr<draw_manager> draw_manager_creator::get_manager()
+{
+    if (_manager == nullptr)
+        create_manager();
+
+    return _manager;
+}
+
+void draw_manager_creator::create_manager()
+{
+    static std::shared_ptr<draw_manager> _manager(new draw_manager());
+    this->_manager = _manager;
+}
+
 void draw_manager::set_cam(const std::shared_ptr<camera> &_camera)
 {
     cur_cam = _camera;

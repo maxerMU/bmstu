@@ -1,4 +1,3 @@
-#include <fstream>
 #include <vector>
 
 #include "load_exceptions.h"
@@ -6,16 +5,28 @@
 #include "point.h"
 #include "edge.h"
 
-file_loader::file_loader()
+model_file_loader::model_file_loader()
 {
-    _builder = std::shared_ptr<base_builder>(new model_builder);
+    _builder = std::shared_ptr<model_builder>(new model_builder);
 }
 
-std::shared_ptr<model> file_loader::load_model(const std::string &name)
+model_file_loader::model_file_loader(std::ifstream &file)
+{
+    _builder = std::shared_ptr<model_builder>(new model_builder);
+    this->file = file;
+}
+
+void model_file_loader::open(const std::string &name)
+{
+    file = std::ifstream(name);
+
+    if (!file)
+        throw file_open_exception();
+}
+
+std::shared_ptr<object> model_file_loader::load()
 {
     _builder->reset();
-
-    std::ifstream file(name);
 
     if (!file)
         throw file_open_exception();
@@ -54,5 +65,110 @@ std::shared_ptr<model> file_loader::load_model(const std::string &name)
     }
     _builder->build_edges(edges);
 
-    return _builder->get();
+    return std::dynamic_pointer_cast<object>(_builder->get());
+}
+
+void model_file_loader::close()
+{
+    file.close();
+}
+
+camera_file_loader::camera_file_loader()
+{
+    _builder = std::shared_ptr<camera_builder>(new camera_builder);
+}
+
+camera_file_loader::camera_file_loader(std::ifstream &file)
+{
+    _builder = std::shared_ptr<camera_builder>(new camera_builder);
+    this->file = file;
+}
+
+void camera_file_loader::open(const std::string &name)
+{
+    file = std::ifstream(name);
+
+    if (!file)
+        throw file_open_exception();
+}
+
+std::shared_ptr<object> camera_file_loader::load()
+{
+    _builder->reset();
+
+    if (!file)
+        throw file_open_exception();
+
+    double x, y, z;
+    if (!(file >> x >> y >> z))
+        throw file_format_exception();
+    _builder->build_pos(x, y, z);
+
+    if (!(file >> x >> y >> z))
+        throw file_format_exception();
+    _builder->build_angles(x, y, z);
+
+    return std::dynamic_pointer_cast<object>(_builder->get());
+}
+
+void camera_file_loader::close()
+{
+    file.close();
+}
+
+scene_file_loader::scene_file_loader()
+{
+    _builder = std::shared_ptr<scene_builder>(new scene_builder);
+}
+
+scene_file_loader::scene_file_loader(std::ifstream &file)
+{
+    _builder = std::shared_ptr<scene_builder>(new scene_builder);
+    this->file = file;
+}
+
+void scene_file_loader::open(const std::string &name)
+{
+    file = std::ifstream(name);
+
+    if (!file)
+        throw file_open_exception();
+}
+
+std::shared_ptr<object> scene_file_loader::load()
+{
+    _builder->reset();
+
+    if (!file)
+        throw file_open_exception();
+
+    load_models();
+    load_cameras();
+
+    return std::dynamic_pointer_cast<object>(_builder->get());
+}
+
+void scene_file_loader::close()
+{
+    file.close();
+}
+
+void scene_file_loader::load_models()
+{
+    size_t models_count;
+    if (!(file >> models_count))
+        throw file_format_exception();
+    for (size_t i = 0; i < models_count; i++)
+        _builder->build_model(model_file_loader(file).load());
+
+}
+
+void scene_file_loader::load_cameras()
+{
+    size_t cameras_count;
+    if (!(file >> cameras_count))
+        throw file_format_exception();
+    for (size_t i = 0; i < cameras_count; i++)
+        _builder->build_camera(camera_file_loader(file).load());
+
 }

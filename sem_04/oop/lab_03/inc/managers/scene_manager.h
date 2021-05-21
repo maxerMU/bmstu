@@ -23,4 +23,15 @@ private:
     std::shared_ptr<camera> current_cam;
 };
 
+class scene_manager_creator
+{
+public:
+    std::shared_ptr<scene_manager> get_manager();
+
+private:
+    void create_manager();
+
+    std::shared_ptr<scene_manager> _manager;
+};
+
 #endif // SCENE_MANAGER_H

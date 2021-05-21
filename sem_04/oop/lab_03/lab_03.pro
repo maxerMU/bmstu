@@ -6,7 +6,6 @@ CONFIG += c++11
 
 INCLUDEPATH += inc/gui
 INCLUDEPATH += inc/facade
-INCLUDEPATH += inc/controller
 INCLUDEPATH += inc/object
 INCLUDEPATH += inc/scene
 INCLUDEPATH += inc/managers
@@ -14,6 +13,7 @@ INCLUDEPATH += "inc/load"
 INCLUDEPATH += inc/commands
 INCLUDEPATH += inc/exceptions
 INCLUDEPATH += inc/visitor
+INCLUDEPATH += inc/config
 
 # The following define makes your compiler emit warnings if you use
 # any Qt feature that has been marked deprecated (the exact warnings
@@ -29,12 +29,21 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     "src/load/file_loader.cpp" \
     src/commands/commands.cpp \
-    src/controller/controller_creator.cpp \
+    src/config/camera_load_solution.cpp \
+    src/config/model_load_solution.cpp \
+    src/config/registration.cpp \
+    src/config/scene_load_solution.cpp \
+    src/config/solution.cpp \
     src/gui/abstract_factory.cpp \
     src/gui/qt_factory.cpp \
-    src/load/builder.cpp \
+    src/load/camera_builder.cpp \
+    src/load/directors.cpp \
+    src/load/load_director.cpp \
+    src/load/model_builder.cpp \
+    src/load/scene_builder.cpp \
+    src/managers/config_manager.cpp \
+    src/managers/load_manager.cpp \
     src/managers/reform_manager.cpp \
-    src/controller/controller.cpp \
     src/facade/facade.cpp \
     src/gui/qt_drawer.cpp \
     src/main.cpp \
@@ -52,9 +61,12 @@ SOURCES += \
 
 HEADERS += \
     inc/commands/commands.h \
-    inc/controller/base_controller.h \
-    inc/controller/controller.h \
-    inc/controller/controller_creator.h \
+    inc/config/camera_load_solution.h \
+    inc/config/loaders.h \
+    inc/config/model_load_solution.h \
+    inc/config/registration.h \
+    inc/config/scene_load_solution.h \
+    inc/config/solution.h \
     inc/exceptions/base_exception.h \
     inc/exceptions/load_exceptions.h \
     inc/exceptions/model_exceptions.h \
@@ -65,11 +77,17 @@ HEADERS += \
     inc/gui/mainwindow.h \
     inc/gui/qt_drawer.h \
     inc/gui/qt_factory.h \
-    inc/load/base_loader.h \
-    inc/load/builder.h \
+    inc/load/camera_builder.h \
+    inc/load/directors.h \
     inc/load/file_loader.h \
+    inc/load/load_director.h \
+    inc/load/model_builder.h \
+    inc/load/scene_builder.h \
+    inc/load/source_loader.h \
     inc/managers/base_manager.h \
+    inc/managers/config_manager.h \
     inc/managers/draw_manager.h \
+    inc/managers/load_manager.h \
     inc/managers/reform_manager.h \
     inc/managers/scene_manager.h \
     inc/object/camera.h \
@@ -95,4 +113,5 @@ DISTFILES += \
     data/dodecahedron.txt \
     data/icosahedron.txt \
     data/octahedron.txt \
-    data/tetrahedron.txt
+    data/tetrahedron.txt \
+    data/model_load.cfg
