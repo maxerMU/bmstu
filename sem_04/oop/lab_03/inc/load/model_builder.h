@@ -7,6 +7,7 @@
 #include "model.h"
 #include "point.h"
 #include "edge.h"
+#include "units.h"
 
 class model_builder
 {
@@ -26,7 +27,7 @@ private:
     void build_point(const point &_point);
     void build_edge(const edge &_edge);
 
-    std::shared_ptr<model> _model;
+    std::shared_ptr<units> _units;
 };
 
 #endif // BUILDER_H

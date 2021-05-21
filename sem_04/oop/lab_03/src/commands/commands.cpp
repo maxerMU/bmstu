@@ -32,6 +32,14 @@ void load_camera_command::execute() const
     scene_manager_creator().get_manager()->get_scene()->add_camera(_camera_obj);
 }
 
+void load_scene_command::execute() const
+{
+    std::shared_ptr<load_manager> _lm = load_manager_creator().get_manager();
+    _lm->set_director(std::shared_ptr<load_director>(new scene_director));
+    std::shared_ptr<object> _scene_obj = _lm->load(file_name);
+    scene_manager_creator().get_manager()->set_scene(std::dynamic_pointer_cast<scene>(_scene_obj));
+}
+
 void remove_model_command::execute() const
 {
     scene_manager_creator().get_manager()->get_scene()->remove_model(index);

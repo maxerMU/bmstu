@@ -36,6 +36,10 @@ void draw_manager::visit(const composite &_composite)
 {
 }
 
+void draw_manager::visit(const scene &_scene)
+{
+}
+
 void draw_manager::visit(const model &_model)
 {
     auto _points = _model.get_units()->get_points();

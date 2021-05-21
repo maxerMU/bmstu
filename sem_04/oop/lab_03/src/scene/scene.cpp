@@ -6,6 +6,11 @@ scene::scene()
     cameras = std::shared_ptr<composite>(new composite);
 }
 
+void scene::accept(const std::shared_ptr<visitor> &_visitor) const
+{
+    _visitor->visit(*this);
+}
+
 void scene::add_model(const std::shared_ptr<object> &_model)
 {
     models->add(_model);
@@ -49,4 +54,13 @@ std::shared_ptr<object> scene::get_camera(size_t index) const
 std::vector<std::shared_ptr<object>> scene::get_cameras() const
 {
     return cameras->get_objects();
+}
+
+void scene::transform(const point &move, const point &scale, const point &rotate)
+{
+    for (auto _model : *models)
+        _model->transform(move, scale, rotate);
+
+    for (auto _camera : *cameras)
+        _camera->transform(move, scale, rotate);
 }

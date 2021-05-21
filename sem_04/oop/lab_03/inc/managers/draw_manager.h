@@ -16,6 +16,7 @@ public:
     virtual void visit(const model &_model) override;
     virtual void visit(const camera &_camera) override;
     virtual void visit(const composite &_composite) override;
+    virtual void visit(const scene &_scene) override;
 
     void set_cam(const std::shared_ptr<camera> &_camera);
     void set_drawer(const std::shared_ptr<base_drawer> &_drawer);

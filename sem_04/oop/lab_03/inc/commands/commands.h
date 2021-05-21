@@ -37,6 +37,17 @@ private:
     std::string file_name;
 };
 
+class load_scene_command : public base_command
+{
+public:
+    explicit load_scene_command(const std::string &file_name) : file_name(file_name) {}
+
+    virtual void execute() const override;
+
+private:
+    std::string file_name;
+};
+
 class remove_model_command : public base_command
 {
 public:
