@@ -20,15 +20,15 @@ void doors::start_opening()
     if (_state != CLOSING && _state != CLOSED)
         return;
 
-    _state = OPENING;
-
     qDebug() << "Doors are opening...";
     if (_state == CLOSED)
     {
+        _state = OPENING;
         doors_open_timer.start(DOORS_TIME);
     }
     else
     {
+        _state = OPENING;
         int t = doors_close_timer.remainingTime();
         doors_close_timer.stop();
         doors_open_timer.start(DOORS_TIME - t);
