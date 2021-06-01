@@ -62,6 +62,7 @@ void canvas::cut()
 {
     _cutter.cut();
     this->update();
+    is_adding = false;
 }
 
 void canvas::set_bg(const QColor &color)
@@ -102,6 +103,7 @@ void canvas::paintEvent(QPaintEvent *event)
 
 void canvas::mousePressEvent(QMouseEvent *event)
 {
+    is_adding = true;
     Qt::KeyboardModifiers key = QApplication::queryKeyboardModifiers();
     bool is_hor = false, is_vert = false;
     if (key == Qt::ShiftModifier)
@@ -114,6 +116,8 @@ void canvas::mousePressEvent(QMouseEvent *event)
 
 void canvas::mouseMoveEvent(QMouseEvent *event)
 {
+    if (!is_adding)
+        return;
     Qt::KeyboardModifiers key = QApplication::queryKeyboardModifiers();
     bool is_hor = false, is_vert = false;
     if (key == Qt::ShiftModifier)
@@ -127,6 +131,7 @@ void canvas::mouseMoveEvent(QMouseEvent *event)
 void canvas::clear()
 {
     _cutter.clear();
+    is_adding = true;
 
     this->update();
 }

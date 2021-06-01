@@ -32,6 +32,6 @@ private:
     Ui::MainWindow *ui;
     QColor seg_col = QColor(0, 0, 0);
     QColor vis_col = QColor(255, 0, 0);
-    QColor cut_col = QColor(0, 127, 0);
+    QColor cut_col = QColor(255, 127, 0);
 };
 #endif // MAINWINDOW_H

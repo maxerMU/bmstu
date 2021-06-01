@@ -33,7 +33,8 @@ public:
     void cut();
 
 private:
-    QColor bg = QColor(100, 100, 100);
+    bool is_adding = true;
+    QColor bg = QColor(255, 255, 255);
     cutter _cutter = cutter(QColor(0, 0, 0), QColor(0, 0, 0), QColor(0, 0, 0));
 
 signals:
