@@ -34,6 +34,9 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->func_ind->addItem(QString("cos(x) * sin(z)"));
     ui->func_ind->addItem(QString("exp(sin(sqrt(x * x + z * z)))"));
+    ui->func_ind->addItem(QString("x * x - 2 * z"));
+    ui->func_ind->addItem(QString("sin(x) * sin(z)"));
+    ui->func_ind->addItem(QString("cos(x) * cos(z)"));
     ui->x_min->setText(QString("-5"));
     ui->x_max->setText(QString("5"));
     ui->z_min->setText(QString("-5"));

@@ -6,6 +6,9 @@ horizont::horizont(QObject *parent) : QObject(parent)
 {
     funcs.push_back(f0);
     funcs.push_back(f1);
+    funcs.push_back(f2);
+    funcs.push_back(f3);
+    funcs.push_back(f4);
 }
 
 void horizont::set_func_index(int ind)
@@ -186,6 +189,15 @@ static long sign(double x)
 void horizont::find_inter(long &xi, long &yi, long x1, long y1,
                           long x2, long y2, const std::vector<long> &hor) const
 {
+    if (x2 < x1)
+    {
+        long temp = x1;
+        x1 = x2;
+        x2 = temp;
+        temp = y1;
+        y1 = y2;
+        y2 = temp;
+    }
     if (x2 == x1)
     {
         xi = x2;
@@ -194,7 +206,7 @@ void horizont::find_inter(long &xi, long &yi, long x1, long y1,
     else
     {
         double m = (y2 - y1) / (double) (x2 - x1);
-        long ysign = sign(y1 + m - hor[x1 + 1]);
+        long ysign = sign(y1 - hor[x1]);
         long csign = ysign;
         long x = x1 + 1, y = y1 + m;
         while (csign == ysign && x <= x2 + 1)
@@ -275,6 +287,10 @@ void horizont::find_horizonts(canvas &field) const
         edge_handling(xl, yl, top, bottom, xprev, yprev);
         long prevflag;
         is_visible(prevflag, xprev, yprev, top, bottom);
+        if (prevflag)
+            field.draw_line(xprev, yprev, xl, yl, DRAW_COLOR);
+        xl = xprev;
+        yl = yprev;
 
         for (double x = xmin; x < xmax || fabs(x - xmax) < EPS; x += xstep)
         {
@@ -372,5 +388,9 @@ void horizont::find_horizonts(canvas &field) const
         }
 
         edge_handling(xr, yr, top, bottom, xprev, yprev);
+        if (prevflag)
+            field.draw_line(xprev, yprev, xr, yr, DRAW_COLOR);
+        xr = xprev;
+        yr = yprev;
     }
 }

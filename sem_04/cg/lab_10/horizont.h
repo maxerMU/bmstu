@@ -18,6 +18,21 @@ static inline double f1(double x, double z)
     return exp(sin(sqrt(x * x + z * z)));
 }
 
+static inline double f2(double x, double z)
+{
+    return sqrt(fabs(x * x - 2 * z));
+}
+
+static inline double f3(double x, double z)
+{
+    return sin(x) * sin(z);
+}
+
+static inline double f4(double x, double z)
+{
+    return cos(x) * cos(z);
+}
+
 typedef double (*surf_func_t)(double, double);
 
 #include <QObject>
