@@ -9,9 +9,9 @@ main:
 	speed 		 DB 00h
 
 my_08h proc
-	
-	
 	pushf
+	call cs:old
+
 	push ax
 	push bx
 	push cx
@@ -20,7 +20,6 @@ my_08h proc
 	push es
 	push si
 	
-	call cs:old
 	xor ax, ax
     mov al, ds:timer
     inc al

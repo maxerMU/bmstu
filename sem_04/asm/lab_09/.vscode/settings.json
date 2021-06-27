@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "64_bit_compare.h": "c",
+        "stdio.h": "c",
+        "pi_accuracy_compare.h": "c"
+    }
+}
