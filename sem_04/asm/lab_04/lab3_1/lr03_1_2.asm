@@ -1,7 +1,7 @@
 PUBLIC output_X
 EXTRN X: byte
 
-DS2 SEGMENT AT 0b800h
+DS2 SEGMENT PARA PUBLIC 'DATA'
 	CA LABEL byte
 	ORG 80 * 2 * 2 + 2 * 2
 	SYMB LABEL word
